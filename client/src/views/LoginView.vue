@@ -8,7 +8,8 @@
         <b-form @submit="onSubmit">
           <b-form-group>
             <label>Brukernavn / e-post
-              <b-form-input type="text"
+              <b-form-input id="usernameInput"
+                            type="text"
                             v-model="form.username"
                             required>
               </b-form-input>
@@ -17,7 +18,7 @@
           <b-form-group>
 
             <label>Passord
-              <b-form-input id="exampleInput2"
+              <b-form-input id="passwordInput"
                             type="password"
                             v-model="form.password"
                             required>
