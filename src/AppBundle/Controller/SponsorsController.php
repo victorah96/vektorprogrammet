@@ -94,4 +94,19 @@ class SponsorsController extends BaseController
         $this->addFlash("success", "Sponsor {$sponsor->getName()} ble slettet.");
         return $this->redirectToRoute("sponsors_show");
     }
+
+    /**
+     * @Route("/samarbeidspartnere", name="for_sponsor")
+     *
+     */
+    public function forSponsorPageAction(){
+        return $this->render("sponsors/for_sponsor.html.twig");
+    }
+
+
+
+
 }
+
+
+
