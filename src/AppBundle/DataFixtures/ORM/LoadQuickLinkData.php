@@ -25,6 +25,7 @@ class LoadQuickLinkData extends AbstractFixture implements OrderedFixtureInterfa
             ->setTitle("Link til drive")
             ->setUrl("https://drive.google.com")
             ->setVisible(true)
+            ->setIconUrl("https://upload.wikimedia.org/wikipedia/commons/d/da/Google_Drive_logo.png")
             ->setOwner($this->getReference('user-admin'));
         $manager->persist($quickLink);
 
