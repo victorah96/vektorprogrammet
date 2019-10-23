@@ -63,7 +63,8 @@ update_static_content:
 control_panel:
   path: /kontrollpanel
   defaults: { _controller: AppBundle:ControlPanel:show }
-  methods: [GET]
+  methods: [GET,POST]
+
 
 
 ##########################################
@@ -1302,6 +1303,10 @@ about_new:
 ##########################################
 #               Feedback                 #
 ##########################################
+feedback_error_submit:
+    path: /error/feedback/submit
+    defaults: {_controller: AppBundle:Feedback:errorSubmit}
+    methods: [POST]
 feedback_admin_index:
     path: /kontrollpanel/feedback
     defaults: {_controller: AppBundle:Feedback:index }
@@ -1314,4 +1319,8 @@ feedback_admin_show:
     path: /kontrollpanel/feedback/show/{id}
     defaults: {_controller: AppBundle:Feedback:show }
     methods: [GET]
+feedback_admin_submit:
+    path: /kontrollpanel/feedback/submit
+    defaults: {_controller: AppBundle:Feedback:adminSubmit}
+    methods: [POST]
 
