@@ -49,6 +49,13 @@ faq:
  defaults: {_controller: AppBundle:AboutVektor:show}
  methods: [GET]
 
+reports:
+ path: /reports
+ defaults: {_controller: AppBundle:Report:show}
+ methods: [GET]
+
+
+
 # Updates static content
 # Not meant for rendering a page. Receives a post request and updates the database.
 update_static_content:
