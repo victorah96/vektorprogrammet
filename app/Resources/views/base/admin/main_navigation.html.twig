@@ -244,6 +244,18 @@
             } %}
 
             {% include 'base/admin/nav_link.html.twig' with {
+                route: 'reports_list',
+                icon: 'check-square',
+                name: 'Årsrapporter',
+                activeRoutes: [
+                    'reports_list',
+                    'reports_create',
+                    'report_edit',
+                    'reports_delete',
+                ]
+            } %}
+
+            {% include 'base/admin/nav_link.html.twig' with {
                 route: 'todo_list',
                 icon: 'clipboard-list',
                 name: 'Sjekkliste',

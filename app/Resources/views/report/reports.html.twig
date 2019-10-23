@@ -1,32 +1,43 @@
-{% extends 'base.html.twig' %}
+{% extends 'adminBase.html.twig' %}
 
 {% block title %}
-    Rapporter
+    Sjekkliste
 {% endblock %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset_with_version('css/pages/reports.css') }}">
+{% block breadcrumb %}
+    <li class="breadcrumb-item active">Årsrapporter</li>
 {% endblock %}
+
+{% block breadcrumb_menu %}
+{% endblock %}
+
 
 {% block body %}
-    <div class="container-fluid">
-        <div class="reports-header content">
-            <header class="page-header row">
 
-                <div class="col-12">
-                    <h1>
-                        Rapporter
-                    </h1>
-                    <br>
-                    <p>Her skal årsapportene til Vektorprogrammet komme. Stay tuned.</p>
-                </div>
+    <h2 class="text-center my-5">Årsrapporter</h2>
 
-            </header>
+    <div class="card">
+
+        <div class="card-header"><i class="fa fa-check-square"></i>Årsrapport</div>
+        <div class="table-responsive">
+
+            <table width="100%" class="application-table table table-striped">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>År</th>
+                    <th>Fil</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
 
         </div>
     </div>
 
+
 {% endblock %}
 
-{% block javascripts %}
-{% endblock %}
+
