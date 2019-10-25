@@ -9,6 +9,10 @@ namespace AppBundle\Entity;
  */
 
 class Report
+    # TODO: PDF FILE IS CURRRENTLY A STRING
+    # to keep things simple in the beginning
+    # should later be a pdf file
+
 {
     /**
      * @var integer
@@ -27,12 +31,13 @@ class Report
     private $year;
 
 
-    # ---------TODO--------- #
     /**
-     * @var #FILE??
+     * @var string
+     *
+     * @ORM\Column(name="pdfFile", type="string")
+     *
      */
     private $pdfFile;
-    # ----------------------- #
 
 
     /**
@@ -76,8 +81,27 @@ class Report
         return $this;
     }
 
-    # TODO
-    #   -set pdfFile
-    #   -get pdfFile?
+
+    /**
+     * Get pdfFile
+     *
+     * @return Report
+     */
+    public function getPdfFile()
+    {
+        return $this->pdfFile;
+    }
+
+    /**
+     * Set pdfFile
+     *
+     * @return pdfFile
+     */
+    public function setPdfFile($pdfFile)
+    {
+        $this->pdfFile = $pdfFile;
+
+        return $this;
+    }
 
 }

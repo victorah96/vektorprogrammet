@@ -1,0 +1,53 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}
+    Opprett Årsrapport
+{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item">
+        <a href="{{ path('reports_list') }}">Årsrapport</a>
+    </li>
+    <li class="breadcrumb-item active">Opprett</li>
+{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-header"><i class="fa fa-clipboard-list"></i> Opprett årsrapport </div>
+        <div class="card-body">
+
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+            <div class="row">
+
+                <div class="col-12 col-md-12 col-lg-6">
+
+                    {{ form_row(form.year) }}
+                    {{ form_row(form.pdfFile) }}
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-6">
+                    <button type="submit" class="btn btn-success cta-link"> Opprett</button>
+                    <a href="{{ path('reports_list') }}">
+                        <button type="button" class=" btn btn-primary">Avbryt</button>
+                    </a>
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+
+            <br>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

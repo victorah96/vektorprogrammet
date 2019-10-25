@@ -1,11 +1,19 @@
 {% extends 'adminBase.html.twig' %}
 
 {% block title %}
-    Sjekkliste
+    Årsrapporter
 {% endblock %}
 
 {% block breadcrumb %}
     <li class="breadcrumb-item active">Årsrapporter</li>
+
+    <div class="btn-group">
+        <a class="btn text-success"
+           href="{{ path('create_report')}}">
+            <i class="fa fa-plus text-success"></i>
+            Ny årsrapport
+        </a>
+    </div>
 {% endblock %}
 
 {% block breadcrumb_menu %}
@@ -21,7 +29,7 @@
         <div class="card-header"><i class="fa fa-check-square"></i>Årsrapport</div>
         <div class="table-responsive">
 
-            <table width="100%" class="application-table table table-striped">
+            <table style="width:100%;" class="application-table table table-striped">
                 <thead>
                 <tr>
                     <th>År</th>
