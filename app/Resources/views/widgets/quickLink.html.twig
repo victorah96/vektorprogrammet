@@ -1,11 +1,26 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">Quicklinks</div>
+            <div class="card-body">
+                <div class="row">
+                        {% for quicklink in quickLinks %}
+                        <div class="col-4">
 
-<div class="col-4">
-    {% for quicklink in quickLinks %}
-
-            {{ quicklink.getTitle() }}
-        <a href={{ quicklink.getUrl() }}> {{ quicklink.getIconUrl()}} </a>
-
-    {% endfor %}
+                        <div class="row">{{ quicklink.getTitle() }}</div>
+                            <div class="row">
+                                <a href={{ quicklink.getUrl() }}> <img src= {{ quicklink.getIconUrl()}} alt= {{ quicklink.getTitle() }} height="42" width="42"> </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="col-6">
+
+
+
 <!--=======-->
 

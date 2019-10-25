@@ -35,7 +35,9 @@ class LoadQuickLinkData extends AbstractFixture implements OrderedFixtureInterfa
             ->setTitle("Link til gmail")
             ->setUrl("https://mail.google.com")
             ->setVisible(true)
+            ->setIconUrl("https://cdn.imgbin.com/13/23/21/imgbin-gmail-email-logo-g-suite-google-gmail-gmail-icon-Wx6AacCLBd7kM75xsEpgH4xpR.jpg")
             ->setOwner($this->getReference('user-admin'));
+
         $manager->persist($quickLink);
 
 
