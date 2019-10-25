@@ -3,14 +3,11 @@
 namespace AppBundle\Controller;
 use AppBundle\Form\Type\CreateReportType;
 use AppBundle\Entity\Report;
+use AppBundle\Service\ReportService;
 use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\Department;
 use AppBundle\Entity\Semester;
-use AppBundle\Form\Type\CreateTodoItemInfoType;
-use AppBundle\Model\TodoItemInfo;
-use AppBundle\Entity\TodoItem;
-use AppBundle\Service\TodoListService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 
@@ -37,11 +34,11 @@ class ReportController extends BaseController
     public function createReportAction(Request $request)
     {
 
-        #$em = $this->getManager();
-        #TODO: Service
-        $Report = new Report();
+        $em = $this->getDoctrine()->getManager();
+        $reportService = $this->get(ReportService::class);
+        $report = new Report();
 
-        $form = $this->createForm(CreateReportType::class, $Report, array(
+        $form = $this->createForm(CreateReportType::class, $report, array(
             'validation_groups' => array('create_report'),
         ));
 
@@ -49,8 +46,8 @@ class ReportController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            #$todoListService->generateEntities($itemInfo, $em);
-            return $this->redirectToRoute('report_list');
+            $reportService->generateEntities($report, $em);
+            return $this->redirectToRoute('reports_list');
         }
 
         return $this->render('report/create_report.html.twig', array(

@@ -1,12 +1,16 @@
 <?php
 
 namespace AppBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * Report
  *
  * @ORM\Table(name="report")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\ReportRepository")
  */
+
 
 class Report
     # TODO: PDF FILE IS CURRRENTLY A STRING
@@ -34,8 +38,7 @@ class Report
     /**
      * @var string
      *
-     * @ORM\Column(name="pdfFile", type="string")
-     *
+     * @ORM\Column(name="pdfFile", type="string", length=255)
      */
     private $pdfFile;
 

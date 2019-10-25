@@ -17,7 +17,7 @@ class ReportService
 
 
     /**
-     * TodoListService constructor.
+     * ReportService constructor.
      * @param EntityManager $em
      */
     public function __construct(EntityManager $em)
@@ -34,6 +34,8 @@ class ReportService
     public function generateEntities(Report $Report)
     {
 
+        $this->em->persist($Report);
+        $this->em->flush();
     }
 
 
