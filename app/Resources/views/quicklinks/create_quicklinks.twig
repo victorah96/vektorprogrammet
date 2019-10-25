@@ -1,0 +1,16 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}
+    Opprett quicklink
+{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item">
+       {# <a href="{{ path('todo_list') }}">Quicklink</a>#}
+    </li>
+    <li class="breadcrumb-item active">Opprett</li>
+{% endblock %}
+
+{% block body %}
+    {{ form(form) }}
+{% endblock %}

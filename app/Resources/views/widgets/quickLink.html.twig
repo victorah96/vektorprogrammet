@@ -1,12 +1,13 @@
 <div class="container">
     <div class="card">
         <div class="card-header">Quicklinks</div>
+
             <div class="card-body">
                 <div class="row">
                         {% for quicklink in quickLinks %}
                         <div class="col-4">
 
-                        <div class="row">{{ quicklink.getTitle() }}</div>
+                            <div class="row"><h6 class="card-title">{{ quicklink.getTitle() }}</h6></div>
                             <div class="row">
                                 <a href={{ quicklink.getUrl() }}> <img src= {{ quicklink.getIconUrl()}} alt= {{ quicklink.getTitle() }} height="42" width="42"> </a>
                             </div>

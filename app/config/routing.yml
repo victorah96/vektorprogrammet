@@ -1196,3 +1196,14 @@ teachers:
 about_new:
     path: /om
     defaults: { _controller: AppBundle:AboutVektor:show }
+
+
+
+##########################################
+#             Quicklinks                 #
+##########################################
+
+quicklink_create:
+ path: /kontrollpanel/quicklinks/ny
+ defaults: { _controller: AppBundle:QuickLink:create }
+ methods: [GET, POST]
