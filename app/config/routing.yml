@@ -63,7 +63,7 @@ update_static_content:
 control_panel:
   path: /kontrollpanel
   defaults: { _controller: AppBundle:ControlPanel:show }
-  methods: [GET,POST]
+  methods: [GET]
 
 
 
