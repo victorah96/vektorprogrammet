@@ -2,6 +2,7 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Entity\Repository\ReportRepository;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\Report;
 
@@ -40,7 +41,13 @@ class ReportService
 
 
 
+    public function getOrderedList()
+    {
+        $repository = $this->em->getRepository('AppBundle:Report');
+        $allReports = $repository->findReports();
 
+        return $repository;
+    }
 
 
 }

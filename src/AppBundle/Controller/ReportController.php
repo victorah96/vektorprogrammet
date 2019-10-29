@@ -2,13 +2,18 @@
 
 namespace AppBundle\Controller;
 use AppBundle\Form\Type\CreateReportType;
+
 use AppBundle\Entity\Report;
 use AppBundle\Service\ReportService;
+use AppBundle\Entity\Repository\ReportRepository;
+
 use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\Department;
 use AppBundle\Entity\Semester;
 use Symfony\Component\HttpFoundation\JsonResponse;
+
+
 
 
 
@@ -21,10 +26,14 @@ class ReportController extends BaseController
 
     public function showAction()
     {
-        #TODO
-        # - load reports etc etc
-        return $this->render('report/reports.html.twig');
+        $reportService = $this->get(ReportService::class);
+        $reportList = $reportService->getOrderedList();
+
+        return $this->render('report/reports.html.twig', array(
+            'reportList' => $reportList,
+        ));
     }
+
 
 
     /**
