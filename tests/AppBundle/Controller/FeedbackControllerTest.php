@@ -98,4 +98,13 @@ class FeedbackControllerTest extends BaseWebTestCase
         $this->assertContains($testTitle, $crawler->filter('.card-header')->text());
         $this->assertContains($testDescription, $crawler->filter('#description')->text());
     }
+    public function testDelete()
+    {
+
+        $client = $this->createTeamMemberClient();
+        $client->request('POST', '/kontrollpanel/feedback/delete/1');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $client->request('POST', '/kontrollpanel/feedback/delete/1');
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+    }
 }
