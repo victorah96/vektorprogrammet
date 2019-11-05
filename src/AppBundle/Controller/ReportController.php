@@ -24,13 +24,18 @@ class ReportController extends BaseController
         return $this->render('report/reports_public.html.twig');
     }
 
-    public function showAction()
+    public function showAction() #PRIVATE
     {
-        $reportService = $this->get(ReportService::class);
-        $reportList = $reportService->getOrderedList();
+        $em = $this->getDoctrine()->getManager();
+        $reportRepository = $em->getRepository('AppBundle:Report');
+
+        // Get array of reports
+        $reportList = $reportRepository->findReports();
+
+
 
         return $this->render('report/reports.html.twig', array(
-            'reportList' => $reportList,
+            //'reportList' => $reportList,
         ));
     }
 
@@ -44,8 +49,10 @@ class ReportController extends BaseController
     {
 
         $em = $this->getDoctrine()->getManager();
-        $reportService = $this->get(ReportService::class);
+        $repository = $em->getRepository('AppBundle:Report');
+
         $report = new Report();
+
 
         $form = $this->createForm(CreateReportType::class, $report, array(
             'validation_groups' => array('create_report'),
@@ -55,7 +62,7 @@ class ReportController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $reportService->generateEntities($report, $em);
+            $repository->generateEntities($report, $em);
             return $this->redirectToRoute('reports_list');
         }
 
@@ -63,9 +70,6 @@ class ReportController extends BaseController
             'form' => $form->createView(),
         ));
 
-
-
-        #return $this->render('report/reports.html.twig');
 
     }
 
