@@ -93,7 +93,7 @@ edit_report:      # Edit Report
 
 delete_report:    # Delete Report
  path: /kontrollpanel/report/slett/{id}
- defaults: {_controller: AppBundle:TodoList:deleteReport }
+ defaults: {_controller: AppBundle:Report:deleteReport }
  methods: [POST]
  requirements:
   id: \d+

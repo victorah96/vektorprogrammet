@@ -43,7 +43,7 @@
                     <tr id="{{ report.id }}">
 
                         <td class="table-menu">
-                            {% if has_access_to('edit_todo') %}
+                            {% if has_access_to('edit_report') %}
                                 <div class="dropdown">
                                     <div class="clickable px-2" id="options-{{ report.id }}" data-toggle="dropdown"
 
@@ -60,7 +60,7 @@
                                                 Endre
                                             </button>
                                         </a>
-                                        {% if has_access_to('delete_todo') %}
+                                        {% if has_access_to('delete_report') %}
                                             <form method="POST"
                                                   onsubmit="return confirm('Er du sikker på at du vil slette årsrapporten?')"
                                                   action="{{ path('delete_report', {'id': report.id}) }}">

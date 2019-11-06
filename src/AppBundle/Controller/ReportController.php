@@ -4,16 +4,7 @@ namespace AppBundle\Controller;
 use AppBundle\Form\Type\CreateReportType;
 
 use AppBundle\Entity\Report;
-use AppBundle\Service\ReportService;
-use AppBundle\Entity\Repository\ReportRepository;
-
 use Symfony\Component\HttpFoundation\Request;
-
-use AppBundle\Entity\Department;
-use AppBundle\Entity\Semester;
-use Symfony\Component\HttpFoundation\JsonResponse;
-
-
 
 
 
@@ -72,11 +63,24 @@ class ReportController extends BaseController
     }
 
 
-    public function editAction()        # TODO
+    public function editReportAction()        # TODO
     {
     }
 
-    public function deleteAction()      # TODO
+
+    /**
+     * @param Report $report
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteReportAction(Report $report)
     {
+        // Delete report
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($report);
+        $em->flush();
+
+        // Redirect
+        return $this->redirectToRoute('reports_list');
     }
 }
