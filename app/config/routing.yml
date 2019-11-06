@@ -1207,3 +1207,18 @@ quicklink_create:
  path: /kontrollpanel/quicklinks/ny
  defaults: { _controller: AppBundle:QuickLink:create }
  methods: [GET, POST]
+
+quicklink_edit:
+ path: /kontrollpanel/quicklinks/edit/{id}
+ defaults: { _controller: AppBundle:QuickLink:edit }
+ methods: [GET, POST]
+
+quicklink_delete:
+ path: /kontrollpanel/quicklinks/delete
+ defaults: { _controller: AppBundle:QuickLink:delete }
+ methods: [GET, POST]
+
+quicklinks:
+ path: /kontrollpanel/quicklinks
+ defaults: { _controller: AppBundle:QuickLink:show }
+ methods: [GET]
