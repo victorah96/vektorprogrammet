@@ -71,7 +71,6 @@ reports:         # Show report
  methods: [GET]
 # PUBLIC END #
 
-
 reports_list:     # List Reports
  path: /kontrollpanel/reports
  defaults: { _controller: AppBundle:Report:show }
