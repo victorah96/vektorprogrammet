@@ -38,26 +38,62 @@
                 </thead>
                 <tbody>
 
+
                 {% for report in reportList %}
-                    <td>
-                        {{ report.year }}
-                    </td>
-                    <td>
-                        {{ report.pdfFile }}
-                    </td>
+                    <tr id="{{ report.id }}">
+
+                        <td class="table-menu">
+                            {% if has_access_to('edit_todo') %}
+                                <div class="dropdown">
+                                    <div class="clickable px-2" id="options-{{ report.id }}" data-toggle="dropdown"
+
+                                         aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-ellipsis-v text-secondary"></i>
+                                    </div>
+                                    <div class="dropdown-menu pt-0" aria-labelledby="options-{{ report.id }}">
+                                        <div class="dropdown-header mb-2"><strong>{{ report.year }}</strong></div>
+
+                                        <a href="{{ path('edit_report', {'id': report.id}) }}">
+                                            <button type="submit"
+                                                    class="dropdown-item text-secondary">
+                                                <i class="fa fa-edit text-secondary"></i>
+                                                Endre
+                                            </button>
+                                        </a>
+                                        {% if has_access_to('delete_todo') %}
+                                            <form method="POST"
+                                                  onsubmit="return confirm('Er du sikker på at du vil slette årsrapporten?')"
+                                                  action="{{ path('delete_report', {'id': report.id}) }}">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <button type="submit"
+                                                                class="dropdown-item text-danger">
+                                                            <i class="fa fa-trash text-danger"></i>
+                                                            Slett
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            <td>
+                            {{ report.year }}
+                            </td>
+
+                            <td>
+                            {{ report.pdfFile }}
+                            </td>
+
+                    </tr>
 
                 {%  endfor %}
 
 
 
 
-
-
-
-
                 </tbody>
             </table>
-
         </div>
     </div>
 
