@@ -1315,7 +1315,7 @@ feedback_error_submit:
 feedback_admin_index:
     path: /kontrollpanel/feedback
     defaults: {_controller: AppBundle:Feedback:index }
-    methods: [GET, POST]
+    methods: [GET]
 feedback_admin_list:
     path: /kontrollpanel/feedback/list
     defaults: {_controller: AppBundle:Feedback:showAll }
@@ -1332,4 +1332,8 @@ feedback_admin_delete:
     path: /kontrollpanel/feedback/delete/{id}
     defaults: {_controller: AppBundle:Feedback:delete}
     methods: [POST]
+feedback_admin_error:
+    path: /error/feedback
+    defaults: {_controller: AppBundle:Feedback:showFeedbackError}
+    methods: [GET]
 
