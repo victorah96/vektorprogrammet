@@ -18,7 +18,12 @@
     </div>{% endblock %}
 {% block body %}
 
-    <h2 class="text-center my-5">Årsrapporter</h2>
+    <h1 class="text-center my-5">Årsrapporter</h1>
+
+    <p>Evalueringsteamet skriver årsrapportene til Vektorprogrammet. I rapportene oppsummeres Vektorprogrammets arbeid i den foregående \
+    perioden, og hvilke mål vi har for neste periode. Rapportene er basert på spørreundersøkelser for assistentene, elevene, lærere, samt foreldre som deltok på foreldrekurs.</p>
+    <br>
+
 
 <div class="card">
 
@@ -30,7 +35,8 @@
                 <tr>
                     <th></th>
                     <th>År</th>
-                    <th>Fil</th>
+                    <th>Filnavn</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -81,6 +87,11 @@
                             <td>
                             {{ report.pdfFile }}
                             </td>
+
+                            <td>
+                                <button type="button" class="btn btn-info">Vis rapport</button>
+                            </td>
+
 
                     </tr>
 
