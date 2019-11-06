@@ -6,20 +6,16 @@
 
 {% block breadcrumb %}
     <li class="breadcrumb-item active">Årsrapporter</li>
-
-    <div class="btn-group">
-        <a class="btn text-success"
-           href="{{ path('create_report')}}">
-            <i class="fa fa-plus text-success"></i>
-            Ny årsrapport
-        </a>
-    </div>
 {% endblock %}
 
 {% block breadcrumb_menu %}
-{% endblock %}
-
-
+    <div class="btn-group">
+    <a class="btn text-success"
+       href="{{ path('create_report')}}">
+        <i class="fa fa-plus text-success"></i>
+        Ny årsrapport
+    </a>
+    </div>{% endblock %}
 {% block body %}
 
     <h2 class="text-center my-5">Årsrapporter</h2>
