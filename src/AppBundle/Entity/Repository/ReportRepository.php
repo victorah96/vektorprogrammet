@@ -13,36 +13,6 @@ use function Clue\StreamFilter\append;
  */
 class ReportRepository extends EntityRepository
 {
-    /**
-     * @var EntityManager
-     *
-     */
-    private $em;
-
-
-    /**
-     * ReportService constructor.
-     * @param EntityManager $em
-     */
-    public function __construct(EntityManager $em)
-    {
-        $this->em = $em;
-    }
-
-    /**
-     * @param
-     * @param EntityManager $em
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function generateEntities(Report $Report)
-    {
-
-        $this->em->persist($Report);
-        $this->em->flush();
-    }
-
-
 
 
 
@@ -51,13 +21,12 @@ class ReportRepository extends EntityRepository
      */
     public function findReports()
     {
-        //$reports = $this->createQueryBuilder('report')
-         //   ->select('report')
-          //  ->getQuery()
-           // ->getResult();
 
-
-        //return $reports;
-
+        return $this->createQueryBuilder('report')
+            ->select('report')
+            ->orderBy("report.year")
+            ->getQuery()
+            ->getResult();
     }
+
 }

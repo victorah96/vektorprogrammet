@@ -38,6 +38,15 @@
                 </thead>
                 <tbody>
 
+                {% for report in reportList %}
+                    <td>
+                        {{ report.year }}
+                    </td>
+                    <td>
+                        {{ report.pdfFile }}
+                    </td>
+
+                {%  endfor %}
 
 
 
