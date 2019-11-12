@@ -62,9 +62,46 @@ update_static_content:
  methods: [POST]
 
 ##########################################
-#                Control Panel           #
+#                Reports                 #
 ##########################################
 
+# PUBLIC #
+reports:         # Show report
+ path: /reports
+ defaults: {_controller: AppBundle:Report:list}
+ methods: [GET]
+# PUBLIC END #
+
+reports_list:     # List Reports
+ path: /kontrollpanel/reports
+ defaults: { _controller: AppBundle:Report:show }
+ methods: [GET]
+
+create_report:    # Create Report
+ path: /kontrollpanel/report/opprett
+ defaults: {_controller: AppBundle:Report:createReport, id: null }
+ methods: [GET, POST]
+ requirements:
+  id: \d+
+
+edit_report:      # Edit Report
+ path: /kontrollpanel/report/endre/{id}
+ defaults: {_controller: AppBundle:Report:editReport }
+ methods: [GET, POST]
+ requirements:
+  id: \d+
+
+delete_report:    # Delete Report
+ path: /kontrollpanel/report/slett/{id}
+ defaults: {_controller: AppBundle:Report:deleteReport }
+ methods: [POST]
+ requirements:
+  id: \d+
+
+
+##########################################
+#                Control Panel           #
+##########################################
 control_panel:
   path: /kontrollpanel
   defaults: { _controller: AppBundle:ControlPanel:show }
