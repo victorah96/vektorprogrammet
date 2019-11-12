@@ -5,13 +5,8 @@
 {% endblock %}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item active">Changelog-objekter</li>
+    <li class="breadcrumb-item"><a href="{{ path('changelog_show_all') }}">Changelog-objekter</a></li>
     <li class="breadcrumb-item active">Changelog-objekt</li>
-{% endblock %}
-
-{% block stylesheets %}
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.16/jquery.datetimepicker.min.css">
 {% endblock %}
 
 {% block body %}
@@ -25,12 +20,6 @@
                     {{ form_row(form.description) }}
                     {{ form_row(form.gitHubLink) }}
                     {{ form_row(form.date) }}
-
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-body">
                     {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
                 </div>
             </div>
@@ -41,22 +30,14 @@
     </div>
     {{ form_end(form) }}
 {% endblock %}
+
 {% block javascripts %}
+
+    {% include 'common/datetime_picker.html.twig' with { inputIds: [form.date.vars.id] } %}
+
     <script src="{{ asset_with_version('js/question_repeater.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', QuestionManager.onReady);
-    </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.16/jquery.datetimepicker.full.min.js"></script>
-    <script>
-        const options = {
-            format: 'd.m.Y H:i',
-            lang: 'no',
-            step: 5,
-        };
-
-        jQuery('#{{ form.date.vars.id }}').datetimepicker(options);
-        console.log("{{ form.date.vars.id }}")
     </script>
     <script>
         var btn = document.getElementById("change_log_save");
