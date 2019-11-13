@@ -1,3 +1,4 @@
+{% extends 'adminBase.html.twig' %}
 {% block title %}
     Quicklinks
 {% endblock %}
@@ -13,17 +14,54 @@
         {#<i class="fa fa-plus"></i> Legg til Quicklink#}
     {#</a>#}
 {#{% endblock %}#}
+{% block body %}
 
-{% for quicklink in quickLinks %}
     <div class="card">
-        <div class="card-title">
-            {{ quicklink.getTitle() }}
-        </div>
-        <div class="col-2">
-            <div class="row">
-                <a href={{ quicklink.getUrl() }}> <img src= {{ quicklink.getIconUrl()}} alt= {{ quicklink.getTitle() }} height="42" width="42"> </a>
-                <button type="button" class="btn btn-danger">Slett</button>
-            </div>
+        <div class="card-header"><i class="fa fa-align-justify"></i> Quicklinks ({{ quickLinks|length }})</div>
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th></th>
+                    <th>Quicklink</th>
+                    <th>URL</th>
+                    <th colspan="2">Logo</th>
+                </tr>
+                {% for quicklink in quickLinks %}
+                    <tr>
+                        <td class="table-menu">
+                            {% if is_granted_team_leader() %}
+                                <div class="dropdown">
+                                    <div class="clickable px-2" id="options-{{ loop.index }}" data-toggle="dropdown"
+                                         aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-ellipsis-v text-secondary"></i>
+                                    </div>
+                                    <div class="dropdown-menu pt-0" aria-labelledby="options-{{ loop.index }}">
+                                        <div class="dropdown-header mb-2"><strong>{{ quicklink.getTitle() }}</strong></div>
+                                        <a href="{{ path('quicklink_edit', { 'id': quicklink.id }) }}"
+                                           class="dropdown-item"><i class="fa fa-pencil text-primary"></i> Rediger
+                                        </a>
+                                        <form method="POST"
+                                              onsubmit="return confirm('Vil du virkelig slette quicklink {{ quicklink.getTitle() }}?')"
+                                              action="{{ path('quicklink_delete', {'id': quicklink.id}) }}">
+                                            <button type="submit"
+                                                    class="dropdown-item">
+                                                <i class="fa fa-trash text-danger"></i> Slett
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            {% endif %}
+                        </td>
+                        <td>{{ quicklink.getTitle() }}</td>
+                        <td>{{ quicklink.getUrl }}</td>
+                        <td><img class="img-fluid" src="{{ asset_with_version(quicklink.getIconUrl()) }}"
+                                 style="max-width: 200px; max-height: 150px;"></td>
+                    </tr>
+                {% endfor %}
+
+            </table>
         </div>
     </div>
-{% endfor %}
+
+{% endblock %}

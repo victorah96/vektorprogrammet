@@ -98,10 +98,9 @@ class QuickLinkController extends Controller
         }
         $em = $this -> getDoctrine() -> getManager();
         //Removing quicklink from database
-        $em = remove($quickLink);
+        $em->remove($quickLink);
         $em->flush();
         $this->addFlash("success","QuickLink {$quickLink->getTitle()} ble slettet:)");
-        //Regner med at jeg må lage en quicklink_show klasse?
         return $this->redirectToRoute("quicklinks");
 
     }

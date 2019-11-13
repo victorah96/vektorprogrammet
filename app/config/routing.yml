@@ -1212,11 +1212,15 @@ quicklink_edit:
  path: /kontrollpanel/quicklinks/edit/{id}
  defaults: { _controller: AppBundle:QuickLink:edit }
  methods: [GET, POST]
+ requirements:
+  id: \d+
 
 quicklink_delete:
- path: /kontrollpanel/quicklinks/delete
+ path: /kontrollpanel/quicklinks/delete/{id}
  defaults: { _controller: AppBundle:QuickLink:delete }
- methods: [GET, POST]
+ methods: [POST]
+ requirements:
+  id: \d+
 
 quicklinks:
  path: /kontrollpanel/quicklinks
