@@ -91,7 +91,32 @@ class QuickLinkController extends Controller
 
     }
 
-    public function deleteAction(Request $request) {
+    public function deleteAction(Request $request, QuickLink $quickLink) {
+        if ($quickLink -> getIconUrl()){
+            //Delete logo using deleteFile method from FileUploader
+            $this->get(FileUploader::class)->deleteFile($quickLink->getIconUrl());
+        }
+        $em = $this -> getDoctrine() -> getManager();
+        //Removing quicklink from database
+        $em = remove($quickLink);
+        $em->flush();
+        $this->addFlash("success","QuickLink {$quickLink->getTitle()} ble slettet:)");
+        //Regner med at jeg må lage en quicklink_show klasse?
+        return $this->redirectToRoute("quicklinks");
+
+    }
+
+    public function showAction(Request $request){
+        $user = $this->getUser();
+        //Retrieve quicklinks from the database
+        $quickLinks = $this->getDoctrine()
+            ->getRepository('AppBundle:QuickLink')
+            ->findBy(['owner' => $user]);
+
+        //Returning an array of quicklinks from the database
+        return $this->render( 'quicklinks/show_quicklinks.twig', [
+            'quickLinks' => $quickLinks,
+        ]);
 
     }
 

@@ -1,0 +1,29 @@
+{% block title %}
+    Quicklinks
+{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item">
+    <li class="breadcrumb-item active">Quicklinks</li>
+    </li>
+{% endblock %}
+
+{#{% block breadcrumb_menu %}#}
+    {#<a href="{{ path('create_quicklinks') }}" class="btn btn-outline-success text-success">#}
+        {#<i class="fa fa-plus"></i> Legg til Quicklink#}
+    {#</a>#}
+{#{% endblock %}#}
+
+{% for quicklink in quickLinks %}
+    <div class="card">
+        <div class="card-title">
+            {{ quicklink.getTitle() }}
+        </div>
+        <div class="col-2">
+            <div class="row">
+                <a href={{ quicklink.getUrl() }}> <img src= {{ quicklink.getIconUrl()}} alt= {{ quicklink.getTitle() }} height="42" width="42"> </a>
+                <button type="button" class="btn btn-danger">Slett</button>
+            </div>
+        </div>
+    </div>
+{% endfor %}
