@@ -5,7 +5,9 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\PasswordReset;
 use AppBundle\Mailer\MailerInterface;
-use Doctrine\ORM\EntityManager;
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
+use Swift_Message;
 
 class PasswordManager
 {
@@ -16,11 +18,11 @@ class PasswordManager
     /**
      * PasswordManager constructor.
      *
-     * @param EntityManager     $em
+     * @param EntityManagerInterface     $em
      * @param MailerInterface   $mailer
      * @param \Twig_Environment $twig
      */
-    public function __construct(EntityManager $em, MailerInterface $mailer, \Twig_Environment $twig)
+    public function __construct(EntityManagerInterface $em, MailerInterface $mailer, \Twig_Environment $twig)
     {
         $this->em = $em;
         $this->mailer = $mailer;
@@ -50,7 +52,7 @@ class PasswordManager
         $hashedResetCode = $this->hashCode($resetCode);
         $passwordReset = $this->em->getRepository('AppBundle:PasswordReset')->findPasswordResetByHashedResetCode($hashedResetCode);
 
-        $currentTime = new \DateTime();
+        $currentTime = new DateTime();
         $timeDifference = date_diff($passwordReset->getResetTime(), $currentTime);
 
         $hasExpired = $timeDifference->d > 1;
@@ -97,7 +99,7 @@ class PasswordManager
     public function sendResetCode(PasswordReset $passwordReset)
     {
         //Sends a email with the url for resetting the password
-        $emailMessage = (new \Swift_Message())
+        $emailMessage = (new Swift_Message())
             ->setSubject('Tilbakestill passord for vektorprogrammet.no')
             ->setFrom(array('ikkesvar@vektorprogrammet.no' => 'Vektorprogrammet'))
             ->setTo($passwordReset->getUser()->getEmail())

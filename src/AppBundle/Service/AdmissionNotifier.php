@@ -7,7 +7,9 @@ use AppBundle\Entity\AdmissionNotification;
 use AppBundle\Entity\AdmissionSubscriber;
 use AppBundle\Entity\Department;
 use AppBundle\Entity\Semester;
-use Doctrine\ORM\EntityManager;
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
+use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -19,7 +21,7 @@ class AdmissionNotifier
     private $validator;
     private $sendLimit;
 
-    public function __construct(EntityManager $em, EmailSender $emailSender, LoggerInterface $logger, ValidatorInterface $validator, int $sendLimit)
+    public function __construct(EntityManagerInterface $em, EmailSender $emailSender, LoggerInterface $logger, ValidatorInterface $validator, int $sendLimit)
     {
         $this->em = $em;
         $this->emailSender = $emailSender;
@@ -35,7 +37,7 @@ class AdmissionNotifier
      * @param bool $infoMeeting
      * @param bool $fromApplication
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function createSubscription(Department $department, string $email, bool $infoMeeting = false, bool $fromApplication = false)
     {
@@ -52,7 +54,7 @@ class AdmissionNotifier
 
         $errors = $this->validator->validate($subscriber);
         if (count($errors) > 0) {
-            throw new \InvalidArgumentException((string) $errors);
+            throw new InvalidArgumentException((string) $errors);
         }
 
         $this->em->persist($subscriber);
@@ -80,7 +82,7 @@ class AdmissionNotifier
                     }
                     $hasApplied = array_search($subscriber->getEmail(), $applicationEmails) !== false;
                     $alreadyNotified = array_search($subscriber->getEmail(), $notificationEmails) !== false;
-                    $subscribedMoreThanOneYearAgo = $subscriber->getTimestamp()->diff(new \DateTime())->y >= 1;
+                    $subscribedMoreThanOneYearAgo = $subscriber->getTimestamp()->diff(new DateTime())->y >= 1;
                     if ($hasApplied || $alreadyNotified || $subscribedMoreThanOneYearAgo) {
                         continue;
                     }
@@ -140,7 +142,7 @@ class AdmissionNotifier
                     }
                     $hasApplied = array_search($subscriber->getEmail(), $applicationEmails) !== false;
                     $alreadyNotified = array_search($subscriber->getEmail(), $notificationEmails) !== false;
-                    $subscribedMoreThanOneYearAgo = $subscriber->getTimestamp()->diff(new \DateTime())->y >= 1;
+                    $subscribedMoreThanOneYearAgo = $subscriber->getTimestamp()->diff(new DateTime())->y >= 1;
                     if ($hasApplied || $alreadyNotified || $subscribedMoreThanOneYearAgo || !$subscriber->getInfoMeeting()) {
                         continue;
                     }
