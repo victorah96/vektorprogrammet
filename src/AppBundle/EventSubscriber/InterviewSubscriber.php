@@ -11,8 +11,9 @@ use AppBundle\Service\SbsData;
 use AppBundle\Sms\Sms;
 use AppBundle\Sms\SmsSenderInterface;
 use Psr\Log\LoggerInterface;
+use Swift_Message;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class InterviewSubscriber implements EventSubscriberInterface
@@ -30,7 +31,7 @@ class InterviewSubscriber implements EventSubscriberInterface
     public function __construct(
         MailerInterface $mailer,
         \Twig_Environment $twig,
-        Session $session,
+        SessionInterface $session,
         LoggerInterface $logger,
         SbsData $sbsData,
         InterviewNotificationManager $notificationManager,
@@ -79,7 +80,7 @@ class InterviewSubscriber implements EventSubscriberInterface
         $interviewer = $application->getInterview()->getInterviewer();
 
         // Send email to the interviewee with a summary of the interview
-        $emailMessage = (new \Swift_Message())
+        $emailMessage = (new Swift_Message())
             ->setSubject('Vektorprogrammet intervju')
             ->setReplyTo(array($interviewer->getDepartment()->getEmail() => 'Vektorprogrammet'))
             ->setTo($application->getUser()->getEmail())
@@ -179,7 +180,7 @@ class InterviewSubscriber implements EventSubscriberInterface
     public function sendCoAssignedEmail(InterviewEvent $event)
     {
         $interview = $event->getInterview();
-        $emailMessage = (new \Swift_Message())
+        $emailMessage = (new Swift_Message())
             ->setSubject('Vektorprogrammet intervju')
             ->setFrom(array('vektorbot@vektorprogrammet.no' => 'Vektorprogrammet'))
             ->setTo($interview->getInterviewer()->getEmail())
