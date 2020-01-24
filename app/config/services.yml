@@ -48,6 +48,7 @@ services:
             $fromEmail: '%default_survey_email%'
 
     AppBundle\Service\GeoLocation:
+        public: true
         arguments:
             $ipinfoToken: '%ipinfo_token%'
             $ignoredAsns: '%geo_ignored_asns%'

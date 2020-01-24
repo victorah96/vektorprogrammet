@@ -3,8 +3,9 @@
 namespace AppBundle\Twig\Extension;
 
 use Symfony\Component\Asset\Packages;
+use Twig\Extension\AbstractExtension;
 
-class AssetExtension extends \Twig_Extension
+class AssetExtension extends AbstractExtension
 {
     private $packages;
     private $rootDir;
