@@ -5,7 +5,7 @@ namespace AppBundle\DataFixtures\ORM;
 use AppBundle\Entity\ExecutiveBoard;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class LoadExecutiveBoardData extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -14,7 +14,7 @@ class LoadExecutiveBoardData extends AbstractFixture implements OrderedFixtureIn
         $board = new ExecutiveBoard();
         $board->setName('Hovedstyret');
         $board->setShortDescription('Dette her hovedstyret. Det er vi som bestemmer alt!');
-        $board->setDescription('<table border="1" cellpadding="1" cellspacing="1" style="width:500px">
+        $board->setDescription('<table style="width:500px">
 	<tbody>
 		<tr>
 			<td>Dette er en tabell</td>

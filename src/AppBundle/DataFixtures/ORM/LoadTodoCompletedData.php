@@ -6,7 +6,7 @@ use AppBundle\Entity\TodoCompleted;
 use DateTime;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class LoadTodoCompletedData extends AbstractFixture implements OrderedFixtureInterface
 {

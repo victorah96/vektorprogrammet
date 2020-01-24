@@ -5,7 +5,7 @@ namespace AppBundle\DataFixtures\ORM;
 use AppBundle\Entity\TodoMandatory;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class LoadTodoMandatoryData extends AbstractFixture implements OrderedFixtureInterface
 {
