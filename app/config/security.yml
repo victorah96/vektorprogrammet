@@ -39,9 +39,11 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
         admin_area:
+            logout_on_user_change: true
             pattern:    ^/admin
-            http_basic: ~ 
+            http_basic: ~
         secured_area:
+            logout_on_user_change: true
             anonymous: ~
             http_basic: ~
             form_login:
