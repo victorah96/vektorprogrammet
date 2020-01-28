@@ -2,10 +2,7 @@
 
 namespace AppBundle\Command;
 
-use AppBundle\Entity\Subscriber;
 use AppBundle\Service\AdmissionNotifier;
-use AppBundle\Service\EmailSender;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

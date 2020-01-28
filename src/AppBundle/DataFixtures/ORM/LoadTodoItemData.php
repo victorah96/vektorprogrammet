@@ -5,7 +5,7 @@ namespace AppBundle\DataFixtures\ORM;
 use DateTime;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use AppBundle\Entity\TodoItem;
 use function GuzzleHttp\Promise\iter_for;
 

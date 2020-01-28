@@ -5,7 +5,7 @@ namespace AppBundle\DataFixtures\ORM;
 use AppBundle\Entity\Team;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class LoadTeamData extends AbstractFixture implements OrderedFixtureInterface
 {
