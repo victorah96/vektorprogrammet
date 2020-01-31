@@ -5,10 +5,9 @@ namespace AppBundle\Service;
 use AppBundle\Entity\AdmissionPeriod;
 use AppBundle\Entity\Application;
 use AppBundle\Entity\Department;
-use AppBundle\Entity\Semester;
 use AppBundle\Entity\User;
 use AppBundle\Role\Roles;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -22,11 +21,11 @@ class ApplicationAdmission
     /**
      * AdmissionManager constructor.
      *
-     * @param EntityManager     $em
+     * @param EntityManagerInterface     $em
      * @param \Twig_Environment $twig
      * @param LoginManager      $loginManager
      */
-    public function __construct(EntityManager $em, \Twig_Environment $twig, LoginManager $loginManager)
+    public function __construct(EntityManagerInterface $em, \Twig_Environment $twig, LoginManager $loginManager)
     {
         $this->em = $em;
         $this->twig = $twig;
