@@ -48,6 +48,7 @@ services:
             $fromEmail: '%default_survey_email%'
 
     AppBundle\Service\GeoLocation:
+        public: true
         arguments:
             $ipinfoToken: '%ipinfo_token%'
             $ignoredAsns: '%geo_ignored_asns%'
@@ -71,6 +72,22 @@ services:
             $profilePhotoFolder: '%profile_photos%'
             $articleFolder: '%article_images%'
             $sponsorFolder: '%logo_images%'
+
+    AppBundle\Service\RoleManager:
+        public: true
+
+    AppBundle\Service\SbsData:
+        public: true
+
+    AppBundle\Service\Sorter:
+        public: true
+
+    AppBundle\Service\AdmissionStatistics:
+        public: true
+
+
+
+
 
     get_set_method_normalizer:
         class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
