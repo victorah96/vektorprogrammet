@@ -2,6 +2,8 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
+        public: false
+
         bind:
             AppBundle\Mailer\MailerInterface: '@AppBundle\Mailer\Mailer'
             AppBundle\Sms\SmsSenderInterface: '@AppBundle\Sms\SmsSender'
@@ -25,6 +27,12 @@ services:
         class: GuzzleHttp\Client
         arguments:
             - { timeout: 2 }
+
+
+    # Relying on service aut-registration is deprecateed, hence the creation of this:
+    # It does remove the deprecation from symfony, but does it work as it should..?
+    AppBundle\Sms\SlackSms:
+
 
     AppBundle\Sms\SmsSender:
         arguments:
@@ -84,6 +92,9 @@ services:
 
     AppBundle\Service\AdmissionStatistics:
         public: true
+
+    Symfony\Component\Serializer\NameConverter\NameConverterInterface: '@serializer.name_converter.camel_case_to_snake_case'
+    Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface: '@doctrine.orm.default_entity_manager.property_info_extractor'
 
 
 
