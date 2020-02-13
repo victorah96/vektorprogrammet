@@ -48,6 +48,7 @@ services:
             $fromEmail: '%default_survey_email%'
 
     AppBundle\Service\GeoLocation:
+        public: true
         arguments:
             $ipinfoToken: '%ipinfo_token%'
             $ignoredAsns: '%geo_ignored_asns%'
@@ -76,6 +77,26 @@ services:
         class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
         public: false
         tags: [serializer.normalizer]
+
+
+    AppBundle\Service\RoleManager:
+        public: true
+
+    AppBundle\Service\SbsData:
+        public: true
+
+    AppBundle\Service\Sorter:
+        public: true
+
+    AppBundle\Service\AdmissionStatistics:
+        public: true
+
+    AppBundle\Service\ApplicationAdmission:
+        public: true
+
+    AppBundle\Service\FilterService:
+        public: true
+
 
 
     Symfony\Component\Serializer\NameConverter\NameConverterInterface: '@serializer.name_converter.camel_case_to_snake_case'
