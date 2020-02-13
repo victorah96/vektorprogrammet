@@ -7,7 +7,7 @@ use AppBundle\Entity\SupportTicket;
 use AppBundle\Entity\Receipt;
 use AppBundle\Mailer\MailerInterface;
 use Swift_Message;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Router;
 
 class EmailSender
 {
@@ -17,7 +17,7 @@ class EmailSender
     private $economyEmail;
     private $router;
 
-    public function __construct(MailerInterface $mailer, \Twig_Environment $twig, RouterInterface $router, string $defaultEmail, string $economyEmail)
+    public function __construct(MailerInterface $mailer, \Twig_Environment $twig, Router $router, string $defaultEmail, string $economyEmail)
     {
         $this->mailer = $mailer;
         $this->twig = $twig;

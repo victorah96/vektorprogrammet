@@ -16,7 +16,7 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Swift_Message;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -42,7 +42,7 @@ class InterviewManager
      * @param \Twig_Environment $twig
      * @param LoggerInterface $logger
      * @param EntityManagerInterface $em
-     * @param RouterInterface $router
+     * @param Router $router
      * @param SmsSenderInterface $smsSender
      */
     public function __construct(TokenStorageInterface $tokenStorage,
@@ -51,7 +51,7 @@ class InterviewManager
                                 \Twig_Environment $twig,
                                 LoggerInterface $logger,
                                 EntityManagerInterface $em,
-                                RouterInterface $router,
+                                Router $router,
                                 SmsSenderInterface $smsSender)
     {
         $this->tokenStorage = $tokenStorage;

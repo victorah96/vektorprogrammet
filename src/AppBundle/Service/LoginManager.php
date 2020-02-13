@@ -2,7 +2,7 @@
 
 namespace AppBundle\Service;
 
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class LoginManager
@@ -18,7 +18,7 @@ class LoginManager
      * @param $authenticationUtils
      * @param $router
      */
-    public function __construct(\Twig_Environment $twig, AuthenticationUtils $authenticationUtils, RouterInterface $router)
+    public function __construct(\Twig_Environment $twig, AuthenticationUtils $authenticationUtils, Router $router)
     {
         $this->twig = $twig;
         $this->authenticationUtils = $authenticationUtils;
