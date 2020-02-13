@@ -99,6 +99,21 @@ services:
     AppBundle\Service\FilterService:
         public: true
 
+    AppBundle\Service\TodoListService:
+        public: true
+
+    AppBundle\Service\AccessControlService:
+        public: true
+
+    AppBundle\Service\ApplicationData:
+        public: true
+
+    AppBundle\Service\AssistantHistoryData:
+        public: true
+
+    AppBundle\Service\InterviewCounter:
+        public: true
+
 
 
     Symfony\Component\Serializer\NameConverter\NameConverterInterface: '@serializer.name_converter.camel_case_to_snake_case'
