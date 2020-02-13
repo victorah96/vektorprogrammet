@@ -45,7 +45,8 @@ security:
                 provider: chain_provider
 
         secured_area:
-            #logout_on_user_change: true
+            stateless: true
+            logout_on_user_change: true
             anonymous: ~
             http_basic:
                 provider: chain_provider
