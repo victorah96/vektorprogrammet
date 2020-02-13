@@ -30,6 +30,8 @@ services:
         arguments:
             $env: '%kernel.environment%'
 
+    AppBundle\Sms\SlackSms: ~
+
     AppBundle\Sms\GatewayAPI:
         arguments:
             $smsOptions: '%gateway_sms%'
