@@ -5,6 +5,7 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\PasswordReset;
 use AppBundle\Mailer\MailerInterface;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Swift_Message;
 
@@ -51,7 +52,7 @@ class PasswordManager
         $hashedResetCode = $this->hashCode($resetCode);
         $passwordReset = $this->em->getRepository('AppBundle:PasswordReset')->findPasswordResetByHashedResetCode($hashedResetCode);
 
-        $currentTime = new \DateTime();
+        $currentTime = new DateTime();
         $timeDifference = date_diff($passwordReset->getResetTime(), $currentTime);
 
         $hasExpired = $timeDifference->d > 1;
