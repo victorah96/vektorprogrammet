@@ -4,7 +4,7 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Department;
 use AppBundle\Entity\Semester;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class InterviewNotificationManager
 {
@@ -13,13 +13,14 @@ class InterviewNotificationManager
     private $router;
 
     /**
-     * InterviewNotificationManager constructor.
+     * Inter
+     * viewNotificationManager constructor.
      *
      * @param SlackMessenger  $slackMessenger
      * @param ApplicationData $applicationData
-     * @param Router          $router
+     * @param UrlGeneratorInterface          $router
      */
-    public function __construct(SlackMessenger $slackMessenger, ApplicationData $applicationData, Router $router)
+    public function __construct(SlackMessenger $slackMessenger, ApplicationData $applicationData, UrlGeneratorInterface $router)
     {
         $this->slackMessenger = $slackMessenger;
         $this->applicationData = $applicationData;
@@ -37,7 +38,7 @@ class InterviewNotificationManager
                 'department' => $department->getId(),
                 'semester' => $semester->getId(),
             ),
-            Router::ABSOLUTE_URL
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $this->slackMessenger->notify(
@@ -69,7 +70,7 @@ class InterviewNotificationManager
                     'department' => $department->getId(),
                     'semester' => $semester->getId(),
                 ),
-                Router::ABSOLUTE_URL
+                UrlGeneratorInterface::ABSOLUTE_URL
             )
         );
     }
