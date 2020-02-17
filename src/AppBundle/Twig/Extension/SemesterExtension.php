@@ -3,8 +3,10 @@
 namespace AppBundle\Twig\Extension;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class SemesterExtension extends \Twig_Extension
+class SemesterExtension extends AbstractExtension
 {
     private $em;
 
@@ -21,7 +23,7 @@ class SemesterExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('get_semesters', array($this, 'getSemesters')),
+            new TwigFunction('get_semesters', array($this, 'getSemesters')),
         );
     }
 
