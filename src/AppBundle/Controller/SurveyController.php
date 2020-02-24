@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * SurveyController is the controller responsible for survey actions,
@@ -115,8 +114,9 @@ class SurveyController extends BaseController
     }
 
 
-    public function showUserAction(Request $request, Survey $survey, UserInterface $user)
+    public function showUserAction(Request $request, Survey $survey)
     {
+        $user = $this->getUser();
         if ($survey->getTargetAudience() === Survey::$SCHOOL_SURVEY) {
             return $this->redirectToRoute('survey_show', array('id' => $survey->getId()));
         } elseif ($user === null) {
@@ -230,10 +230,10 @@ class SurveyController extends BaseController
         ));
     }
 
-    public function createSurveyAction(Request $request, UserInterface $user)
+    public function createSurveyAction(Request $request)
     {
         $survey = new Survey();
-        $survey->setDepartment($user->getDepartment());
+        $survey->setDepartment($this->getUser()->getDepartment());
 
         if ($this->get(AccessControlService::class)->checkAccess("survey_admin")) {
             $form = $this->createForm(SurveyAdminType::class, $survey);
@@ -450,19 +450,21 @@ class SurveyController extends BaseController
         return CsvUtil::makeCsvResponse($csv_string);
     }
 
-    public function toggleReservedFromPopUpAction(UserInterface $user)
+    public function toggleReservedFromPopUpAction()
     {
+        $user = $this->getUser();
         if ($user === null) {
             return null;
         }
 
-        $this->get(SurveyManager::class)->toggleReservedFromPopUp($user);
+        $this->get(SurveyManager::class)->toggleReservedFromPopUp($this->getUser());
 
         return new JsonResponse();
     }
 
-    public function closePopUpAction(UserInterface $user)
+    public function closePopUpAction()
     {
+        $user = $this->getUser();
         $user->setLastPopUpTime(new \DateTime());
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
@@ -477,10 +479,11 @@ class SurveyController extends BaseController
      * Throws unless you are in the same department as the survey, or you are a survey_admin.
      * If the survey is confidential, only survey_admin has access.
      *
-     * @param UserInterface $user
+     * @throws AccessDeniedException
      */
-    private function ensureAccess(Survey $survey, UserInterface $user)
+    private function ensureAccess(Survey $survey)
     {
+        $user = $this->getUser();
 
         $isSurveyAdmin = $this->get(AccessControlService::class)->checkAccess("survey_admin");
         $isSameDepartment = $survey->getDepartment() === $user->getDepartment();

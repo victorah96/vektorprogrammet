@@ -7,13 +7,12 @@ use AppBundle\Role\Roles;
 use AppBundle\Form\Type\CreateAssistantHistoryType;
 use AppBundle\Service\LogService;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class AssistantHistoryController extends BaseController
 {
-    public function deleteAction(AssistantHistory $assistantHistory, UserInterface $user)
+    public function deleteAction(AssistantHistory $assistantHistory)
     {
-        if (!$this->isGranted(Roles::ADMIN) && $assistantHistory->getUser()->getDepartment() !== $user->getDepartment()) {
+        if (!$this->isGranted(Roles::ADMIN) && $assistantHistory->getUser()->getDepartment() !== $this->getUser()->getDepartment()) {
             $this->createAccessDeniedException();
         }
 
@@ -22,7 +21,7 @@ class AssistantHistoryController extends BaseController
         $em->flush();
 
         $this->get(LogService::class)->info(
-            "{$user} deleted {$assistantHistory->getUser()}'s assistant history on ".
+            "{$this->getUser()} deleted {$assistantHistory->getUser()}'s assistant history on ".
             "{$assistantHistory->getSchool()->getName()} {$assistantHistory->getSemester()->getName()}"
         );
 

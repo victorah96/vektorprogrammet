@@ -10,7 +10,6 @@ use AppBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class AccountController extends BaseController
 {
@@ -67,19 +66,19 @@ class AccountController extends BaseController
     /**
      * @Route("api/account/user")
      *
-     * @param UserInterface $user
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \BCC\AutoMapperBundle\Mapper\Exception\InvalidClassConstructorException
      */
-    public function getUserAction(UserInterface $user)
+    public function getUserAction()
     {
-        if (!$user) {
+        if (!$this->getUser()) {
             return new JsonResponse(null);
         }
 
         $mapper = $this->get('bcc_auto_mapper.mapper');
         $mapper->createMap(User::class, UserDto::class);
         $userDto = new UserDto();
-        $mapper->map($user, $userDto);
+        $mapper->map($this->getUser(), $userDto);
 
         return new JsonResponse($userDto);
     }

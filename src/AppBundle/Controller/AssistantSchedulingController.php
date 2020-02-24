@@ -7,7 +7,6 @@ use AppBundle\AssistantScheduling\Assistant;
 use AppBundle\AssistantScheduling\School;
 use AppBundle\Entity\SchoolCapacity;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class AssistantSchedulingController extends BaseController
 {
@@ -17,11 +16,14 @@ class AssistantSchedulingController extends BaseController
     }
 
     /**
-     * @param UserInterface $user
      * @return JsonResponse
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getAssistantsAction(UserInterface $user)
+    public function getAssistantsAction()
     {
+        $user = $this->getUser();
+
         $currentSemester = $this->getDoctrine()->getRepository('AppBundle:Semester')->findCurrentSemester();
         $currentAdmissionPeriod = $this->getDoctrine()->getRepository('AppBundle:AdmissionPeriod')
             ->findOneByDepartmentAndSemester($user->getDepartment(), $currentSemester);
@@ -80,11 +82,13 @@ class AssistantSchedulingController extends BaseController
     }
 
     /**
-     * @param UserInterface $user
      * @return JsonResponse
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getSchoolsAction(UserInterface $user)
+    public function getSchoolsAction()
     {
+        $user = $this->getUser();
         $department = $user->getFieldOfStudy()->getDepartment();
         $currentSemester = $this->getDoctrine()->getRepository('AppBundle:Semester')->findCurrentSemester();
         $allCurrentSchoolCapacities = $this->getDoctrine()

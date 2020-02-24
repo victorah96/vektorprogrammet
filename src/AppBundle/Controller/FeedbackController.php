@@ -5,14 +5,14 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Type\FeedbackType;
 use AppBundle\Entity\Feedback;
 use AppBundle\Service\SlackMessenger;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class FeedbackController extends BaseController
 {
     //shows form for submitting a new feedback
-    public function indexAction(Request $request, UserInterface $user)
+    public function indexAction(Request $request)
     {
         $feedback = new Feedback;
+        $user = $this->getUser();
 
         $form = $this->createForm(FeedBackType::class, $feedback);
         $form->handleRequest($request);

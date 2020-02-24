@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Entity\Article;
 use AppBundle\Form\Type\ArticleType;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * ArticleAdminController is the controller responsible for the administrative article actions,
@@ -64,10 +63,9 @@ class ArticleAdminController extends BaseController
      *
      * @param Request $request
      *
-     * @param UserInterface $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function createAction(Request $request, UserInterface $user)
+    public function createAction(Request $request)
     {
         $article       = new Article();
         $form          = $this->createForm(ArticleType::class, $article);
@@ -82,7 +80,7 @@ class ArticleAdminController extends BaseController
             $em = $this->getDoctrine()->getManager();
 
             // Set the author to the currently logged in user
-            $article->setAuthor($user);
+            $article->setAuthor($this->getUser());
 
             $imageSmall = $this->get(FileUploader::class)->uploadArticleImage($request, 'imgsmall');
             $imageLarge = $this->get(FileUploader::class)->uploadArticleImage($request, 'imglarge');
@@ -122,10 +120,9 @@ class ArticleAdminController extends BaseController
      * @param Request $request
      * @param Article $article
      *
-     * @param UserInterface $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(Request $request, Article $article, UserInterface $user)
+    public function editAction(Request $request, Article $article)
     {
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
@@ -150,7 +147,7 @@ class ArticleAdminController extends BaseController
                 'Endringene har blitt publisert.'
             );
 
-            $this->get(LogService::class)->info("The article \"{$article->getTitle()}\" was edited by {$user}");
+            $this->get(LogService::class)->info("The article \"{$article->getTitle()}\" was edited by {$this->getUser()}");
 
             return new JsonResponse("ok");
         } elseif ($form->isSubmitted()) {

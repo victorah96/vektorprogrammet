@@ -10,9 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SurveyPopupController extends Controller
 {
-    public function nextSurveyAction(UserInterface $user)
+    public function nextSurveyAction()
     {
         $survey = null;
+        $user = $this->getUser();
         $userShouldSeePopUp = $user !== null &&
             $this->get(RoleManager::class)->userIsGranted($user, Roles::TEAM_MEMBER) &&
             !$user->getReservedFromPopUp() &&
@@ -23,7 +24,7 @@ class SurveyPopupController extends Controller
 
             $surveys = $this->getDoctrine()
                 ->getRepository('AppBundle:Survey')
-                ->findAllNotTakenByUserAndSemester($user, $semester);
+                ->findAllNotTakenByUserAndSemester($this->getUser(), $semester);
 
             if (!empty($surveys)) {
                 $survey = end($surveys);

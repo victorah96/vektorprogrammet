@@ -6,13 +6,12 @@ use AppBundle\Entity\FieldOfStudy;
 use AppBundle\Form\Type\FieldOfStudyType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class FieldOfStudyController extends BaseController
 {
-    public function showAction(UserInterface $user)
+    public function showAction()
     {
-        $department = $user->getFieldOfStudy()->getDepartment();
+        $department = $this->getUser()->getFieldOfStudy()->getDepartment();
         $fieldOfStudies = $this->getDoctrine()->getRepository('AppBundle:FieldOfStudy')->findByDepartment($department);
 
         return $this->render('field_of_study/show_all.html.twig', array(
@@ -21,7 +20,7 @@ class FieldOfStudyController extends BaseController
         ));
     }
 
-    public function editAction(Request $request, UserInterface $user, FieldOfStudy $fieldOfStudy = null)
+    public function editAction(Request $request, FieldOfStudy $fieldOfStudy = null)
     {
         $isEdit = true;
         if ($fieldOfStudy === null) {
@@ -29,7 +28,7 @@ class FieldOfStudyController extends BaseController
             $isEdit = false;
         } else {
             // Check if user is trying to edit FOS from department other than his own
-            if ($fieldOfStudy->getDepartment() !== $user->getFieldOfStudy()->getDepartment()) {
+            if ($fieldOfStudy->getDepartment() !== $this->getUser()->getFieldOfStudy()->getDepartment()) {
                 throw new AccessDeniedException();
             }
         }
@@ -37,7 +36,7 @@ class FieldOfStudyController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $fieldOfStudy->setDepartment($user->getFieldOfStudy()->getDepartment());
+            $fieldOfStudy->setDepartment($this->getUser()->getFieldOfStudy()->getDepartment());
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($fieldOfStudy);
             $manager->flush();

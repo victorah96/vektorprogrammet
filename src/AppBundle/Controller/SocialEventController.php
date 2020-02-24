@@ -6,7 +6,6 @@ use AppBundle\Entity\SocialEvent;
 use AppBundle\Form\Type\SocialEventType;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\SocialEventManager;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class SocialEventController extends BaseController
 {
@@ -30,15 +29,15 @@ class SocialEventController extends BaseController
 
     /**
      * @param Request $request
-     * @param UserInterface $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function createSocialEventAction(Request $request, UserInterface $user)
+    public function createSocialEventAction(Request $request)
     {
         $department = $this->getDepartmentOrThrow404();
         $semester = $this->getSemesterOrThrow404();
         $em              = $this->getDoctrine()->getManager();
         $socialEvent    = new SocialEvent();
+        $user            = $this->getUser();
 
         $form = $this->createForm(SocialEventType::class, $socialEvent, array(
             'department'        => $department,

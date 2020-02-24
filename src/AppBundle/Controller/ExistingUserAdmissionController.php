@@ -9,7 +9,6 @@ use Doctrine\ORM\NoResultException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class ExistingUserAdmissionController extends BaseController
 {
@@ -19,11 +18,13 @@ class ExistingUserAdmissionController extends BaseController
      *
      * @param Request $request
      *
-     * @param UserInterface $user
      * @return null|\Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function showAction(Request $request, UserInterface $user)
+    public function showAction(Request $request)
     {
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $admissionManager = $this->get(ApplicationAdmission::class);
         if ($res = $admissionManager->renderErrorPage($user)) {

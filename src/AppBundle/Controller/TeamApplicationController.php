@@ -13,12 +13,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class TeamApplicationController extends BaseController
 {
-    public function showApplicationAction(TeamApplication $application, UserInterface $user)
+    public function showApplicationAction(TeamApplication $application)
     {
+        $user = $this->getUser();
         $activeUserHistoriesInTeam = $this->getDoctrine()->getRepository('AppBundle:TeamMembership')->findActiveTeamMembershipsByTeamAndUser($application->getTeam(), $user);
         if (empty($activeUserHistoriesInTeam) && !$this->isGranted(Roles::TEAM_LEADER)) {
             throw new AccessDeniedException();
@@ -29,9 +29,10 @@ class TeamApplicationController extends BaseController
         ));
     }
 
-    public function showAllApplicationsAction(Team $team, UserInterface $user)
+    public function showAllApplicationsAction(Team $team)
     {
         $applications = $this->getDoctrine()->getRepository('AppBundle:TeamApplication')->findByTeam($team);
+        $user = $this->getUser();
         $activeUserHistoriesInTeam = $this->getDoctrine()->getRepository('AppBundle:TeamMembership')->findActiveTeamMembershipsByTeamAndUser($team, $user);
         if (empty($activeUserHistoriesInTeam) && !$this->isGranted(Roles::TEAM_LEADER)) {
             throw new AccessDeniedException();
