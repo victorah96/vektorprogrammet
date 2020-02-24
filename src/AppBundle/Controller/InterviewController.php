@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use InvalidArgumentException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * InterviewController is the controller responsible for interview actions,
@@ -38,17 +39,19 @@ class InterviewController extends BaseController
      * @param Request $request
      * @param Application $application
      *
+     * @param UserInterface $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
-    public function conductAction(Request $request, Application $application)
+    public function conductAction(Request $request, Application $application, UserInterface $user)
     {
         if ($application->getInterview() === null) {
             throw $this->createNotFoundException();
         }
-        $department = $this->getUser()->getDepartment();
+        $department = $user->getDepartment();
         $teams = $this->getDoctrine()->getRepository('AppBundle:Team')->findActiveByDepartment($department);
 
-        if ($this->getUser() === $application->getUser()) {
+        if ($user === $application->getUser()) {
             return $this->render('error/control_panel_error.html.twig', array( 'error' => 'Du kan ikke intervjue deg selv' ));
         }
 
@@ -117,9 +120,10 @@ class InterviewController extends BaseController
      *
      * @param Application $application
      *
+     * @param UserInterface $user
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction(Application $application)
+    public function showAction(Application $application, UserInterface $user)
     {
         if (null === $interview = $application->getInterview()) {
             throw $this->createNotFoundException('Interview not found.');
@@ -127,7 +131,7 @@ class InterviewController extends BaseController
 
         // Only accessible for admin and above, or team members belonging to the same department as the interview
         if (! $this->get(InterviewManager::class)->loggedInUserCanSeeInterview($interview) ||
-             $this->getUser() === $application->getUser()
+             $user === $application->getUser()
         ) {
             throw $this->createAccessDeniedException();
         }
@@ -387,9 +391,10 @@ class InterviewController extends BaseController
     /**
      * @param Interview $interview
      *
+     * @param UserInterface $user
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function acceptByResponseCodeAction(Interview $interview)
+    public function acceptByResponseCodeAction(Interview $interview, UserInterface $user)
     {
         $interview->acceptInterview();
         $manager = $this->getDoctrine()->getManager();
@@ -403,7 +408,7 @@ class InterviewController extends BaseController
         $successMessage = "Takk for at du aksepterte intervjutiden. Da sees vi $formattedDate klokka $formattedTime i $room!";
         $this->addFlash('success', $successMessage);
 
-        if ($interview->getUser() === $this->getUser()) {
+        if ($interview->getUser() === $user) {
             return $this->redirectToRoute("my_page");
         }
 
@@ -414,9 +419,10 @@ class InterviewController extends BaseController
      * @param Request $request
      * @param Interview $interview
      *
+     * @param UserInterface $user
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function requestNewTimeAction(Request $request, Interview $interview)
+    public function requestNewTimeAction(Request $request, Interview $interview, UserInterface $user)
     {
         if (! $interview->isPending()) {
             throw $this->createNotFoundException();
@@ -436,7 +442,7 @@ class InterviewController extends BaseController
             $this->get(InterviewManager::class)->sendRescheduleEmail($interview);
             $this->addFlash('success', "Forspørsel om ny intervjutid er sendt. Vi tar kontakt med deg når vi har funnet en ny intervjutid.");
 
-            if ($interview->getUser() === $this->getUser()) {
+            if ($interview->getUser() === $user) {
                 return $this->redirectToRoute("my_page");
             }
 
@@ -468,9 +474,10 @@ class InterviewController extends BaseController
      * @param Request $request
      * @param Interview $interview
      *
+     * @param UserInterface $user
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function cancelByResponseCodeAction(Request $request, Interview $interview)
+    public function cancelByResponseCodeAction(Request $request, Interview $interview, UserInterface $user)
     {
         if (! $interview->isPending()) {
             throw $this->createNotFoundException();
@@ -490,7 +497,7 @@ class InterviewController extends BaseController
             $this->get(InterviewManager::class)->sendCancelEmail($interview);
             $this->addFlash('success', "Du har kansellert intervjuet ditt.");
 
-            if ($interview->getUser() === $this->getUser()) {
+            if ($interview->getUser() === $user) {
                 return $this->redirectToRoute("my_page");
             }
 
@@ -526,9 +533,9 @@ class InterviewController extends BaseController
         );
     }
 
-    public function assignCoInterviewerAction(Interview $interview)
+    public function assignCoInterviewerAction(Interview $interview, UserInterface $user)
     {
-        if ($interview->getUser() === $this->getUser()) {
+        if ($interview->getUser() === $user) {
             return $this->render('error/control_panel_error.html.twig', array(
                 'error' => 'Kan ikke legge til deg selv som medintervjuer på ditt eget intervju'
             ));
@@ -540,13 +547,13 @@ class InterviewController extends BaseController
             ));
         }
 
-        if ($this->getUser() === $interview->getInterviewer()) {
+        if ($user === $interview->getInterviewer()) {
             return $this->render('error/control_panel_error.html.twig', array(
                 'error' => 'Kan ikke legge til deg selv som medintervjuer når du allerede er intervjuer'
             ));
         }
 
-        $interview->setCoInterviewer($this->getUser());
+        $interview->setCoInterviewer($user);
         $em = $this->getDoctrine()->getManager();
         $em->persist($interview);
         $em->flush();

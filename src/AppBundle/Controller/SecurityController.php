@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Role\Roles;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class SecurityController extends BaseController
 {
@@ -27,14 +28,14 @@ class SecurityController extends BaseController
     }
 
     /**
+     * @param UserInterface $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function loginRedirectAction()
+    public function loginRedirectAction(UserInterface $user)
     {
         if ($this->get('security.authorization_checker')->isGranted(Roles::TEAM_MEMBER)) {
             return $this->redirectToRoute('control_panel');
-        } elseif ($this->getDoctrine()->getRepository('AppBundle:Application')->findActiveByUser($this->getUser())) {
+        } elseif ($this->getDoctrine()->getRepository('AppBundle:Application')->findActiveByUser($user)) {
             return $this->redirectToRoute('my_page');
         } else {
             return $this->redirectToRoute('profile');

@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class SurveyNotifierController extends BaseController
 {
@@ -20,7 +21,7 @@ class SurveyNotifierController extends BaseController
     * @param SurveyNotificationCollection $surveyNotificationCollection
     * @return \Symfony\Component\HttpFoundation\Response
     */
-    public function createSurveyNotifierAction(Request $request, SurveyNotificationCollection $surveyNotificationCollection = null)
+    public function createSurveyNotifierAction(Request $request, UserInterface $user, SurveyNotificationCollection $surveyNotificationCollection = null)
     {
         $isUserGroupCollectionEmpty = empty($this->getDoctrine()->getManager()->getRepository(UserGroupCollection::class)->findAll());
         if ($isUserGroupCollectionEmpty) {
@@ -54,7 +55,7 @@ class SurveyNotifierController extends BaseController
                     $view,
                     array(
                         'title' => $subject,
-                        'firstname' => $this->getUser()->getFirstName(),
+                        'firstname' => $user->getFirstName(),
                         'route' => $this->generateUrl('survey_show', ['id' => $surveyNotificationCollection->getSurvey()->getId()], RouterInterface::ABSOLUTE_URL),
                         'day' => "Mandag",
                         'mainMessage' => $surveyNotificationCollection->getEmailMessage(),

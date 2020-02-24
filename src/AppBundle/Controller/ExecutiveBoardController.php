@@ -11,6 +11,7 @@ use AppBundle\Form\Type\CreateExecutiveBoardType;
 use AppBundle\Form\Type\CreateExecutiveBoardMembershipType;
 use AppBundle\Entity\ExecutiveBoardMembership;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ExecutiveBoardController extends BaseController
 {
@@ -44,13 +45,13 @@ class ExecutiveBoardController extends BaseController
         ));
     }
 
-    public function addUserToBoardAction(Request $request, Department $department)
+    public function addUserToBoardAction(Request $request, Department $department, UserInterface $user)
     {
         $board = $this->getDoctrine()->getRepository('AppBundle:ExecutiveBoard')->findBoard();
 
         // Create a new TeamMembership entity
         $member = new ExecutiveBoardMembership();
-        $member->setUser($this->getUser());
+        $member->setUser($user);
 
         // Create a new formType with the needed variables
         $form = $this->createForm(CreateExecutiveBoardMembershipType::class, $member, [

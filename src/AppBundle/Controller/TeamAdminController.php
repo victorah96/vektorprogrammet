@@ -12,19 +12,21 @@ use AppBundle\Entity\Team;
 use AppBundle\Form\Type\CreateTeamType;
 use AppBundle\Entity\TeamMembership;
 use AppBundle\Form\Type\CreateTeamMembershipType;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class TeamAdminController extends BaseController
 {
     /**
      * @Route("/kontrollpanel/team/avdeling/{id}", name="teamadmin_show", defaults={"id":null}, methods={"GET"})
+     * @param UserInterface $user
      * @param Department|null $department
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction(Department $department = null)
+    public function showAction(UserInterface $user, Department $department = null)
     {
         if ($department === null) {
-            $department = $this->getUser()->getDepartment();
+            $department = $user->getDepartment();
         }
 
         // Find teams that are connected to the department of the user
@@ -66,14 +68,14 @@ class TeamAdminController extends BaseController
         ));
     }
 
-    public function addUserToTeamAction(Request $request, Team $team)
+    public function addUserToTeamAction(Request $request, Team $team, UserInterface $user)
     {
         // Find the department of the team
         $department = $team->getDepartment();
 
         // Create a new TeamMembership entity
         $teamMembership = new TeamMembership();
-        $teamMembership->setUser($this->getUser());
+        $teamMembership->setUser($user);
         $teamMembership->setPosition($this->getDoctrine()->getRepository('AppBundle:Position')->findOneBy(array( 'name' => 'Medlem' )));
 
         // Create a new formType with the needed variables
@@ -105,7 +107,7 @@ class TeamAdminController extends BaseController
         ));
     }
 
-    public function showSpecificTeamAction(Team $team)
+    public function showSpecificTeamAction(Team $team, UserInterface $user)
     {
         // Find all TeamMembership entities based on team
         $activeTeamMemberships   = $this->getDoctrine()->getRepository('AppBundle:TeamMembership')->findActiveTeamMembershipsByTeam($team);
@@ -113,7 +115,6 @@ class TeamAdminController extends BaseController
         usort($activeTeamMemberships, array( $this, 'sortTeamMembershipsByEndDate' ));
         usort($inActiveTeamMemberships, array( $this, 'sortTeamMembershipsByEndDate' ));
 
-        $user                      = $this->getUser();
         $currentUserTeamMembership = $this->getDoctrine()->getRepository('AppBundle:TeamMembership')->findActiveTeamMembershipsByUser($user);
         $isUserInTeam              = false;
         foreach ($currentUserTeamMembership as $wh) {

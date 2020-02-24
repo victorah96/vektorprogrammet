@@ -5,12 +5,12 @@ namespace AppBundle\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class SignatureController extends BaseController
 {
-    public function showSignatureImageAction($imageName)
+    public function showSignatureImageAction($imageName, UserInterface $user)
     {
-        $user = $this->getUser();
 
         $signature = $this->getDoctrine()->getRepository('AppBundle:Signature')->findByUser($user);
         if ($signature === null) {

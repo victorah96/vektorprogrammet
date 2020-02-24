@@ -3,15 +3,16 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Role\Roles;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ParticipantHistoryController extends BaseController
 {
-    public function showAction()
+    public function showAction(UserInterface $user)
     {
         $department = $this->getDepartmentOrThrow404();
         $semester = $this->getSemesterOrThrow404();
 
-        if (!$this->isGranted(Roles::TEAM_LEADER) && $department !== $this->getUser()->getDepartment()) {
+        if (!$this->isGranted(Roles::TEAM_LEADER) && $department !== $user->getDepartment()) {
             throw $this->createAccessDeniedException();
         }
 

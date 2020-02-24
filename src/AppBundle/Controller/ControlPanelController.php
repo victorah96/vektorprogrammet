@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Service\SbsData;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ControlPanelController extends BaseController
 {
@@ -20,10 +21,10 @@ class ControlPanelController extends BaseController
         ));
     }
 
-    public function showSBSAction()
+    public function showSBSAction(UserInterface $user)
     {
         $sbsData = $this->get(SbsData::class);
-        $currentAdmissionPeriod = $this->getUser()->getDepartment()->getCurrentAdmissionPeriod();
+        $currentAdmissionPeriod = $user->getDepartment()->getCurrentAdmissionPeriod();
 
         if ($currentAdmissionPeriod) {
             $sbsData->setAdmissionPeriod($currentAdmissionPeriod);

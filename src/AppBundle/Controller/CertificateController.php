@@ -8,6 +8,7 @@ use AppBundle\Form\Type\CreateSignatureType;
 use AppBundle\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class CertificateController extends BaseController
 {
@@ -21,9 +22,10 @@ class CertificateController extends BaseController
      *
      * @param Request $request
      *
+     * @param UserInterface $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function showAction(Request $request)
+    public function showAction(Request $request, UserInterface $user)
     {
         $department = $this->getDepartmentOrThrow404();
         $semester = $this->getSemesterOrThrow404();
@@ -31,7 +33,7 @@ class CertificateController extends BaseController
 
         $assistants = $em->getRepository('AppBundle:AssistantHistory')->findByDepartmentAndSemester($department, $semester);
 
-        $signature = $this->getDoctrine()->getRepository('AppBundle:Signature')->findByUser($this->getUser());
+        $signature = $this->getDoctrine()->getRepository('AppBundle:Signature')->findByUser($user);
         $oldPath = '';
         if ($signature === null) {
             $signature = new Signature();
@@ -54,7 +56,7 @@ class CertificateController extends BaseController
                 $signature->setSignaturePath($oldPath);
             }
 
-            $signature->setUser($this->getUser());
+            $signature->setUser($user);
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($signature);
             $manager->flush();

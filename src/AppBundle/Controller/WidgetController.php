@@ -10,10 +10,11 @@ use AppBundle\Service\Sorter;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Utils\ReceiptStatistics;
 use AppBundle\Service\TodoListService;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class WidgetController extends BaseController
 {
-    public function interviewsAction()
+    public function interviewsAction(UserInterface $user)
     {
         $department = $this->getDepartmentOrThrow404();
         $semester = $this->getSemesterOrThrow404();
@@ -23,7 +24,7 @@ class WidgetController extends BaseController
 
         if ($admissionPeriod !== null) {
             $applicationRepo = $this->getDoctrine()->getRepository('AppBundle:Application');
-            $applicationsAssignedToUser = $applicationRepo->findAssignedByUserAndAdmissionPeriod($this->getUser(), $admissionPeriod);
+            $applicationsAssignedToUser = $applicationRepo->findAssignedByUserAndAdmissionPeriod($user, $admissionPeriod);
         }
 
         return $this->render('widgets/interviews_widget.html.twig', ['applications' => $applicationsAssignedToUser]);
@@ -73,13 +74,13 @@ class WidgetController extends BaseController
     }
 
 
-    public function availableSurveysAction()
+    public function availableSurveysAction(UserInterface $user)
     {
         $semester = $this->getSemesterOrThrow404();
 
         $surveys = $this->getDoctrine()
             ->getRepository('AppBundle:Survey')
-            ->findAllNotTakenByUserAndSemester($this->getUser(), $semester);
+            ->findAllNotTakenByUserAndSemester($user, $semester);
 
 
         return $this->render('widgets/available_surveys_widget.html.twig', [

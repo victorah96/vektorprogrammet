@@ -9,18 +9,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserController extends BaseController
 {
     /**
      * @Route("/min-side", name="my_page")
      *
+     * @param UserInterface $user
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function myPageAction()
+    public function myPageAction(UserInterface $user)
     {
-        $user = $this->getUser();
-
         $department = $user->getDepartment();
         $semester = $this->getDoctrine()->getRepository('AppBundle:Semester')->findCurrentSemester();
         $admissionPeriod = $this->getDoctrine()
@@ -50,14 +50,15 @@ class UserController extends BaseController
     /**
      * @Route("/profil/partnere", name="my_partners")
      *
+     * @param UserInterface $user
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function myPartnerAction()
+    public function myPartnerAction(UserInterface $user)
     {
-        if (!$this->getUser()->isActive()) {
+        if (!$user->isActive()) {
             throw $this->createAccessDeniedException();
         }
-        $activeAssistantHistories = $this->getDoctrine()->getRepository('AppBundle:AssistantHistory')->findActiveAssistantHistoriesByUser($this->getUser());
+        $activeAssistantHistories = $this->getDoctrine()->getRepository('AppBundle:AssistantHistory')->findActiveAssistantHistoriesByUser($user);
         if (empty($activeAssistantHistories)) {
             throw $this->createNotFoundException();
         }
@@ -70,7 +71,7 @@ class UserController extends BaseController
             $partners = [];
 
             foreach ($schoolHistories as $sh) {
-                if ($sh->getUser() === $this->getUser()) {
+                if ($sh->getUser() === $user) {
                     continue;
                 }
                 if ($sh->getDay() !== $activeHistory->getDay()) {
