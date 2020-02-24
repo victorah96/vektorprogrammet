@@ -138,6 +138,7 @@ class SchoolAdminController extends BaseController
 
     public function updateSchoolAction(Request $request, School $school)
     {
+
         // Create the formType
         $form = $this->createForm(CreateSchoolType::class, $school);
 
@@ -156,7 +157,8 @@ class SchoolAdminController extends BaseController
         // Return the form view
         return $this->render('school_admin/create_school.html.twig', array(
             'form' => $form->createView(),
-            'school' => $school
+            'school' => $school,
+            'buttonText' => "Rediger"
         ));
     }
 
@@ -184,6 +186,7 @@ class SchoolAdminController extends BaseController
         // Render the view
         return $this->render('school_admin/create_school.html.twig', array(
             'form' => $form->createView(),
+            'buttonText' => "Opprett"
         ));
     }
 
