@@ -6,6 +6,7 @@ use AppBundle\Event\ApplicationCreatedEvent;
 use AppBundle\Service\AdmissionNotifier;
 use AppBundle\Mailer\MailerInterface;
 use AppBundle\Service\UserRegistration;
+use Exception;
 use Swift_Message;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -57,7 +58,7 @@ class ApplicationSubscriber implements EventSubscriberInterface
         $email = $application->getUser()->getEmail();
         try {
             $this->admissionNotifier->createSubscription($department, $email, true);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // Ignore
         }
     }
