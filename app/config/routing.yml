@@ -15,6 +15,23 @@ github_webook:
 #             Static pages               #
 ##########################################
 
+delete_blogg:
+ path: /slette_innlegg/{id}
+ defaults: { _controller: AppBundle:Blogg:delete}
+ methods: [POST]
+ requirements:
+  id: \d+
+
+create_blogg:
+ path: /nytt_innlegg
+ defaults: { _controller: AppBundle:Blogg:create}
+ methods: [GET, POST]
+
+blogg:
+ path: /blogg
+ defaults: { _controller: AppBundle:Blogg:show}
+ methods: [GET]
+
 helloWorld:
  path: /hello_world
  defaults: { _controller: AppBundle:HelloWorld:show}
