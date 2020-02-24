@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class AssistantHistoryData
 {
-    private $assistantHistoryRepository;
+    private \Doctrine\Persistence\ObjectRepository $assistantHistoryRepository;
     private $semester;
     private $department;
 

@@ -13,12 +13,12 @@ use Symfony\Component\Routing\RouterInterface;
 
 class AccessControlService
 {
-    private $entityManager;
-    private $router;
-    private $roleManager;
-    private $userService;
-    private $accessRulesCache;
-    private $unhandledRulesCache;
+    private EntityManagerInterface $entityManager;
+    private RouterInterface $router;
+    private RoleManager $roleManager;
+    private UserService $userService;
+    private array $accessRulesCache;
+    private array $unhandledRulesCache;
 
     /**
      * ResourceAccessSubscriber constructor.

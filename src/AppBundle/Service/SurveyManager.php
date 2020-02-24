@@ -14,7 +14,7 @@ use RuntimeException;
 
 class SurveyManager
 {
-    private $em;
+    private EntityManagerInterface $em;
 
     /**
      * SurveyManager constructor.

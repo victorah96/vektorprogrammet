@@ -14,11 +14,11 @@ class ApplicationData
     /**
      * @var Department
      */
-    private $department;
+    private Department $department;
     /**
      * @var AdmissionPeriod
      */
-    private $admissionPeriod;
+    private AdmissionPeriod $admissionPeriod;
     /**
      * @var ApplicationRepository
      */
@@ -26,7 +26,7 @@ class ApplicationData
     /**
      * @var EntityManagerInterface
      */
-    private $em;
+    private EntityManagerInterface $em;
 
     /**
      * ApplicationData constructor.

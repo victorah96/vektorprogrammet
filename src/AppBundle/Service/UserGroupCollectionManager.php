@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class UserGroupCollectionManager
 {
-    private $em;
+    private EntityManagerInterface $em;
 
 
     public function __construct(EntityManagerInterface $em)

@@ -9,8 +9,8 @@ use Twig\TwigFunction;
 
 class DepartmentExtension extends AbstractExtension
 {
-    private $em;
-    private $geoLocationService;
+    private EntityManagerInterface $em;
+    private GeoLocation $geoLocationService;
 
     public function __construct(GeoLocation $geoLocationService, EntityManagerInterface $em)
     {

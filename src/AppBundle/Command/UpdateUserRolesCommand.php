@@ -13,17 +13,17 @@ class UpdateUserRolesCommand extends ContainerAwareCommand
     /**
      * @var ObjectManager
      */
-    private $entityManager;
+    private ObjectManager $entityManager;
 
     /**
      * @var RoleManager
      */
-    private $roleManager;
+    private RoleManager $roleManager;
 
     /**
      * @var int
      */
-    private $rolesUpdatedCount;
+    private int $rolesUpdatedCount;
 
     /**
      * {@inheritdoc}

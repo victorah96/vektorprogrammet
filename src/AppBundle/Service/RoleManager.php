@@ -11,12 +11,12 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class RoleManager
 {
-    private $roles = array();
-    private $aliases = array();
-    private $authorizationChecker;
-    private $em;
-    private $logger;
-    private $googleUserService;
+    private array $roles = array();
+    private array $aliases = array();
+    private AuthorizationCheckerInterface $authorizationChecker;
+    private EntityManagerInterface $em;
+    private LoggerInterface $logger;
+    private GoogleUsers $googleUserService;
 
     /**
      * RoleManager constructor.

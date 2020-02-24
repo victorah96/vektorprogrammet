@@ -11,9 +11,9 @@ use Swift_Message;
 
 class PasswordManager
 {
-    private $em;
-    private $mailer;
-    private $twig;
+    private EntityManagerInterface $em;
+    private MailerInterface $mailer;
+    private \Twig_Environment $twig;
 
     /**
      * PasswordManager constructor.

@@ -8,7 +8,7 @@ use Twig\TwigFunction;
 
 class SemesterExtension extends AbstractExtension
 {
-    private $em;
+    private EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $em)
     {

@@ -22,14 +22,14 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class InterviewManager
 {
-    private $tokenStorage;
-    private $authorizationChecker;
-    private $mailer;
-    private $twig;
-    private $logger;
-    private $em;
-    private $router;
-    private $smsSender;
+    private TokenStorageInterface $tokenStorage;
+    private AuthorizationCheckerInterface $authorizationChecker;
+    private Mailer $mailer;
+    private \Twig_Environment $twig;
+    private LoggerInterface $logger;
+    private EntityManagerInterface $em;
+    private RouterInterface $router;
+    private SmsSenderInterface $smsSender;
 
     private const MAX_NUM_ACCEPT_INTERVIEW_REMINDERS_SENT = 3;
 

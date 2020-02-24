@@ -10,9 +10,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class AssistantHistorySubscriber implements EventSubscriberInterface
 {
-    private $session;
-    private $em;
-    private $userRegistrationService;
+    private SessionInterface $session;
+    private EntityManagerInterface $em;
+    private UserRegistration $userRegistrationService;
 
     /**
      * ApplicationAdmissionSubscriber constructor.
