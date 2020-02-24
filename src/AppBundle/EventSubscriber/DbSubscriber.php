@@ -22,9 +22,9 @@ use Psr\Log\LoggerInterface;
 
 class DbSubscriber implements EventSubscriber
 {
-    private LoggerInterface $logger;
-    private array $ignoredClasses;
-    private EntityManagerInterface $manager;
+    private $logger;
+    private $ignoredClasses;
+    private $manager;
 
     public function __construct(LoggerInterface $logger, EntityManagerInterface $manager, string $env)
     {

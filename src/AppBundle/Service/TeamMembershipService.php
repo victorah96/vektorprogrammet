@@ -8,8 +8,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class TeamMembershipService
 {
-    private EntityManagerInterface $em;
-    private EventDispatcherInterface $dispatcher;
+    private $em;
+    private $dispatcher;
 
     public function __construct(EntityManagerInterface $em, EventDispatcherInterface $dispatcher)
     {

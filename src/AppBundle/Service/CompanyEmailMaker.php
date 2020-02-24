@@ -8,8 +8,8 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class CompanyEmailMaker
 {
-    private EntityManagerInterface $em;
-    private LogService $logger;
+    private $em;
+    private $logger;
 
     public function __construct(EntityManagerInterface $em, LogService $logger)
     {

@@ -15,11 +15,11 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AdmissionNotifier
 {
-    private EntityManagerInterface $em;
-    private EmailSender $emailSender;
-    private LoggerInterface $logger;
-    private ValidatorInterface $validator;
-    private int $sendLimit;
+    private $em;
+    private $emailSender;
+    private $logger;
+    private $validator;
+    private $sendLimit;
 
     public function __construct(EntityManagerInterface $em, EmailSender $emailSender, LoggerInterface $logger, ValidatorInterface $validator, int $sendLimit)
     {

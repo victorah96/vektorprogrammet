@@ -8,7 +8,7 @@ use Twig\TwigFunction;
 
 class SponsorsExtension extends AbstractExtension
 {
-    protected EntityManagerInterface $doctrine;
+    protected $doctrine;
 
     public function __construct(EntityManagerInterface $doctrine)
     {

@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class SlugMaker
 {
-    private EntityManagerInterface $em;
+    private $em;
 
     public function __construct(EntityManagerInterface $em)
     {

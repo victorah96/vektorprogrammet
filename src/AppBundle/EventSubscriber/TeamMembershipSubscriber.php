@@ -12,10 +12,10 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class TeamMembershipSubscriber implements EventSubscriberInterface
 {
-    private SessionInterface $session;
-    private LoggerInterface $logger;
-    private RoleManager $roleManager;
-    private EntityManagerInterface $em;
+    private $session;
+    private $logger;
+    private $roleManager;
+    private $em;
 
     public function __construct(SessionInterface $session, LoggerInterface $logger, RoleManager $roleManager, EntityManagerInterface $em)
     {

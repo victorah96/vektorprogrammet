@@ -12,8 +12,8 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class UniqueCompanyEmailValidator extends ConstraintValidator
 {
-    private EntityManagerInterface $em;
-    private GoogleAPI $googleAPI;
+    private $em;
+    private $googleAPI;
 
     public function __construct(EntityManagerInterface $em, GoogleAPI $googleAPI)
     {

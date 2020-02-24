@@ -9,7 +9,7 @@ use Twig\TwigFunction;
 
 class StaticContentExtension extends AbstractExtension
 {
-    private EntityManagerInterface $em;
+    private $em;
 
     public function __construct(EntityManagerInterface $em)
     {

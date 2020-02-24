@@ -4,7 +4,6 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Department;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ObjectRepository;
 use InvalidArgumentException;
 use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -12,15 +11,15 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class GeoLocation
 {
-    private string $ipinfoToken;
-    private ObjectRepository $departmentRepo;
-    private SessionInterface $session;
-    private RequestStack $requestStack;
-    private LogService $logger;
+    private $ipinfoToken;
+    private $departmentRepo;
+    private $session;
+    private $requestStack;
+    private $logger;
     /**
      * @var array
      */
-    private array $ignoredAsns;
+    private $ignoredAsns;
 
     /**
      * GeoLocation constructor.

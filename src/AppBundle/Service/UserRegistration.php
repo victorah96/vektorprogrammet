@@ -10,9 +10,9 @@ use Swift_Message;
 
 class UserRegistration
 {
-    private \Twig_Environment $twig;
-    private EntityManagerInterface $em;
-    private MailerInterface $mailer;
+    private $twig;
+    private $em;
+    private $mailer;
 
     /**
      * UserRegistration constructor.

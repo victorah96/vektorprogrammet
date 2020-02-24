@@ -18,13 +18,13 @@ use Symfony\Component\Routing\RouterInterface;
 
 class SurveyNotifier
 {
-    private EntityManagerInterface $em;
-    private Mailer $mailer;
-    private \Twig_Environment $twig;
-    private LoggerInterface $logger;
-    private RouterInterface $router;
-    private SmsSenderInterface $smsSender;
-    private string $fromEmail;
+    private $em;
+    private $mailer;
+    private $twig;
+    private $logger;
+    private $router;
+    private $smsSender;
+    private $fromEmail;
 
 
 

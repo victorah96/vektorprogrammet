@@ -14,9 +14,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ApplicationAdmission
 {
-    private EntityManagerInterface $em;
-    private \Twig_Environment $twig;
-    private LoginManager $loginManager;
+    private $em;
+    private $twig;
+    private $loginManager;
 
     /**
      * AdmissionManager constructor.

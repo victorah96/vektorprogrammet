@@ -19,7 +19,7 @@ class TodoListService
      * @var EntityManagerInterface
      *
      */
-    private EntityManagerInterface $em;
+    private $em;
 
 
     /**
