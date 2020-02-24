@@ -4,8 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\SocialEvent;
 use AppBundle\Form\Type\SocialEventType;
+use DateTime;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Service\SocialEventManager;
 
 class SocialEventController extends BaseController
 {
@@ -23,7 +23,7 @@ class SocialEventController extends BaseController
             'department' => $department,
             'semester' => $semester,
             'SocialEventList' => $SocialEventList,
-            'now' => new \DateTime(),
+            'now' => new DateTime(),
         ));
     }
 
