@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Min blogg</title>
+</head>
+<body>
+    <h1>Bloggen min</h1>
+
+    {% for bloggInnlegg in bloggInnleggene %}
+        <div>
+            <h2>{{ bloggInnlegg.getOverskrift() }}</h2>
+            {{ bloggInnlegg.getInnlegg() }}
+            <br><br>
+            <form method = "POST" action = {{ path('delete_blogg', {id: bloggInnlegg.id}) }}><button>Slett</button></form>
+        </div>
+    {% endfor %}
+
+</body>
+</html>

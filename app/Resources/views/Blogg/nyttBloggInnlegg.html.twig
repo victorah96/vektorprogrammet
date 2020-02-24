@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nytt innlegg</title>
+</head>
+<body>
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.overskrift) }}
+        {{ form_row(form.innlegg) }}
+
+
+        <button type="submit" class="btn btn-success cta-link">Lagre</button>
+
+        {{ form_end(form) }}
+
+</body>
+</html>
