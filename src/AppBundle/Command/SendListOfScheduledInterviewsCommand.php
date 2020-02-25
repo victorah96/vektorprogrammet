@@ -18,7 +18,7 @@ class SendListOfScheduledInterviewsCommand extends ContainerAwareCommand
     /**
      * @var EntityManagerInterface
      */
-    private EntityManagerInterface $em;
+    private $em;
 
     /**
      * {@inheritdoc}
