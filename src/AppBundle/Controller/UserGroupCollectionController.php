@@ -8,6 +8,7 @@ use AppBundle\Service\UserGroupCollectionManager;
 use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use UnexpectedValueException;
 
 class UserGroupCollectionController extends BaseController
 {
@@ -45,7 +46,7 @@ class UserGroupCollectionController extends BaseController
             } catch (InvalidArgumentException $e) {
                 $this->addFlash("danger", $e->getMessage());
                 return $this->redirect($this->generateUrl('usergroup_collection_create'));
-            } catch (\UnexpectedValueException $e) {
+            } catch (UnexpectedValueException $e) {
                 $this->addFlash("danger", $e->getMessage());
                 return $this->redirect($this->generateUrl('usergroup_collection_create'));
             }
