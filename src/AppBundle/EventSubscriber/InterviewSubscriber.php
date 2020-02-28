@@ -15,6 +15,7 @@ use Swift_Message;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Twig\Environment;
 
 class InterviewSubscriber implements EventSubscriberInterface
 {
@@ -30,7 +31,7 @@ class InterviewSubscriber implements EventSubscriberInterface
 
     public function __construct(
         MailerInterface $mailer,
-        \Twig_Environment $twig,
+        Environment $twig,
         SessionInterface $session,
         LoggerInterface $logger,
         SbsData $sbsData,

@@ -7,6 +7,7 @@ use AppBundle\Mailer\MailerInterface;
 use AppBundle\Role\Roles;
 use Doctrine\ORM\EntityManagerInterface;
 use Swift_Message;
+use Twig\Environment;
 
 class UserRegistration
 {
@@ -17,11 +18,11 @@ class UserRegistration
     /**
      * UserRegistration constructor.
      *
-     * @param \Twig_Environment $twig
+     * @param Environment $twig
      * @param EntityManagerInterface     $em
      * @param MailerInterface   $mailer
      */
-    public function __construct(\Twig_Environment $twig, EntityManagerInterface $em, MailerInterface $mailer)
+    public function __construct(Environment $twig, EntityManagerInterface $em, MailerInterface $mailer)
     {
         $this->twig = $twig;
         $this->em = $em;

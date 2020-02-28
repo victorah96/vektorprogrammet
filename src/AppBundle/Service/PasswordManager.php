@@ -8,6 +8,7 @@ use AppBundle\Mailer\MailerInterface;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Swift_Message;
+use Twig\Environment;
 
 class PasswordManager
 {
@@ -20,9 +21,9 @@ class PasswordManager
      *
      * @param EntityManagerInterface     $em
      * @param MailerInterface   $mailer
-     * @param \Twig_Environment $twig
+     * @param Environment $twig
      */
-    public function __construct(EntityManagerInterface $em, MailerInterface $mailer, \Twig_Environment $twig)
+    public function __construct(EntityManagerInterface $em, MailerInterface $mailer, Environment $twig)
     {
         $this->em = $em;
         $this->mailer = $mailer;

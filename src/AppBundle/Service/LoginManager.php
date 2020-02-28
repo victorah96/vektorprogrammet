@@ -4,6 +4,7 @@ namespace AppBundle\Service;
 
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Twig\Environment;
 
 class LoginManager
 {
@@ -18,7 +19,7 @@ class LoginManager
      * @param $authenticationUtils
      * @param $router
      */
-    public function __construct(\Twig_Environment $twig, AuthenticationUtils $authenticationUtils, UrlGeneratorInterface $router)
+    public function __construct(Environment $twig, AuthenticationUtils $authenticationUtils, UrlGeneratorInterface $router)
     {
         $this->twig = $twig;
         $this->authenticationUtils = $authenticationUtils;

@@ -6,13 +6,14 @@ use AppBundle\Event\TeamMembershipEvent;
 use AppBundle\Mailer\MailerInterface;
 use Swift_Message;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Twig\Environment;
 
 class IntroductionEmailSubscriber implements EventSubscriberInterface
 {
     private $mailer;
     private $twig;
 
-    public function __construct(MailerInterface $mailer, \Twig_Environment $twig)
+    public function __construct(MailerInterface $mailer, Environment $twig)
     {
         $this->mailer = $mailer;
         $this->twig = $twig;
