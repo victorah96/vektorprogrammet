@@ -2,7 +2,6 @@
 
 use AppBundle\Utils\TimeUtil;
 use PHPUnit\Framework\TestCase;
-use DateTime;
 
 class TimeUtilTest extends TestCase
 {

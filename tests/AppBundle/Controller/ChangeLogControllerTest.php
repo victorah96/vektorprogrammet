@@ -1,6 +1,5 @@
 <?php
 
-use DateTime;
 use Tests\BaseWebTestCase;
 
 class ChangeLogControllerTest extends BaseWebTestCase
