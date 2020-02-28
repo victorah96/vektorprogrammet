@@ -7,6 +7,7 @@ use AppBundle\Entity\Application;
 use AppBundle\Entity\Department;
 use AppBundle\Entity\Semester;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -25,7 +26,7 @@ class PartyController extends AbstractFOSRestController
      *     methods={"GET"}
      * )
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      * @throws NotFoundHttpException
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -44,7 +45,7 @@ class PartyController extends AbstractFOSRestController
      *     methods={"GET"}
      * )
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function NewestApplicationsAction(Department $department)
@@ -87,7 +88,7 @@ class PartyController extends AbstractFOSRestController
      *     methods={"GET"}
      * )
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function ApplicationDeadlineAction(Department $department)

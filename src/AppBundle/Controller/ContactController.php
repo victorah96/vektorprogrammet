@@ -11,6 +11,7 @@ use AppBundle\Service\LogService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ContactController extends BaseController
 {
@@ -23,7 +24,7 @@ class ContactController extends BaseController
      * @param Request $request
      * @param Department $department
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function indexAction(Request $request, Department $department = null)
     {

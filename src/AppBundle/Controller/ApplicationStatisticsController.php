@@ -4,11 +4,12 @@ namespace AppBundle\Controller;
 
 use AppBundle\Service\ApplicationData;
 use AppBundle\Service\AssistantHistoryData;
+use Symfony\Component\HttpFoundation\Response;
 
 class ApplicationStatisticsController extends BaseController
 {
     /**
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function showAction()

@@ -7,13 +7,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Type\SponsorType;
 use AppBundle\Entity\Sponsor;
+use Symfony\Component\HttpFoundation\Response;
 
 class SponsorsController extends BaseController
 {
     /**
      * @Route("/kontrollpanel/sponsorer", name="sponsors_show")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function sponsorsShowAction()
     {
@@ -32,7 +33,7 @@ class SponsorsController extends BaseController
      * @param Sponsor $sponsor
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function sponsorEditAction(Sponsor $sponsor = null, Request $request)
     {

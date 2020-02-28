@@ -23,6 +23,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use InvalidArgumentException;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
@@ -40,7 +41,7 @@ class InterviewController extends BaseController
      * @param Request $request
      * @param Application $application
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function conductAction(Request $request, Application $application)
     {
@@ -119,7 +120,7 @@ class InterviewController extends BaseController
      *
      * @param Application $application
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showAction(Application $application)
     {
@@ -201,7 +202,7 @@ class InterviewController extends BaseController
      * @param Request $request
      * @param Application $application
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function scheduleAction(Request $request, Application $application)
     {
@@ -342,7 +343,7 @@ class InterviewController extends BaseController
      *
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function bulkAssignAction(Request $request)
     {
@@ -389,7 +390,7 @@ class InterviewController extends BaseController
     /**
      * @param Interview $interview
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function acceptByResponseCodeAction(Interview $interview)
     {
@@ -416,7 +417,7 @@ class InterviewController extends BaseController
      * @param Request $request
      * @param Interview $interview
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function requestNewTimeAction(Request $request, Interview $interview)
     {
@@ -454,7 +455,7 @@ class InterviewController extends BaseController
     /**
      * @param Interview $interview
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function respondAction(Interview $interview)
     {
@@ -470,7 +471,7 @@ class InterviewController extends BaseController
      * @param Request $request
      * @param Interview $interview
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function cancelByResponseCodeAction(Request $request, Interview $interview)
     {

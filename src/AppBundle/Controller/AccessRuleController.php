@@ -12,13 +12,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AccessRuleController extends Controller
 {
     
     /**
      * @Route("/kontrollpanel/admin/accessrules", name="access_rules_show")
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function indexAction()
     {
@@ -45,7 +46,7 @@ class AccessRuleController extends Controller
      * )
      * @param Request $request
      * @param AccessRule $accessRule
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function createRuleAction(Request $request, AccessRule $accessRule = null)
     {
@@ -89,7 +90,7 @@ class AccessRuleController extends Controller
      * )
      * @param Request $request
      * @param AccessRule $accessRule
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function createRoutingRuleAction(Request $request, AccessRule $accessRule = null)
     {
@@ -131,7 +132,7 @@ class AccessRuleController extends Controller
      *
      * @param Request $request
      * @param AccessRule $rule
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function copyAccessRuleAction(Request $request, AccessRule $rule)
     {
@@ -150,7 +151,7 @@ class AccessRuleController extends Controller
      * )
      * @Method("POST")
      * @param AccessRule $accessRule
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function deleteAction(AccessRule $accessRule)
     {

@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Semester;
 use AppBundle\Form\Type\CreateSemesterType;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SemesterController extends Controller
@@ -15,7 +16,7 @@ class SemesterController extends Controller
     /**
      * @Route(name="semester_show", path="/kontrollpanel/semesteradmin")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showAction()
     {
@@ -30,7 +31,7 @@ class SemesterController extends Controller
      * @Route(name="semester_create", path="/kontrollpanel/semesteradmin/opprett")
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function createSemesterAction(Request $request)

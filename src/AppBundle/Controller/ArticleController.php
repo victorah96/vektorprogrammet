@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Article;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * ArticleController is the controller responsible for articles,
@@ -28,7 +29,7 @@ class ArticleController extends BaseController
      *
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showAction(Request $request)
     {
@@ -58,7 +59,7 @@ class ArticleController extends BaseController
      * @param Request $request
      * @param $department
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showFilterAction(Request $request, $department)
     {
@@ -87,7 +88,7 @@ class ArticleController extends BaseController
      *
      * @param Article $article
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showSpecificAction(Article $article)
     {
@@ -102,7 +103,7 @@ class ArticleController extends BaseController
      *
      * @param $excludeId
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showOtherAction($excludeId)
     {
@@ -117,7 +118,7 @@ class ArticleController extends BaseController
     /**
      * Shows the news carousel.
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showCarouselAction()
     {
@@ -134,7 +135,7 @@ class ArticleController extends BaseController
      *
      * @param $id
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showDepartmentNewsAction($id)
     {

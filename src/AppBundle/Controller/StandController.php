@@ -4,13 +4,14 @@ namespace AppBundle\Controller;
 
 use AppBundle\Service\AdmissionStatistics;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 class StandController extends BaseController
 {
     /**
      * @Route("/kontrollpanel/stand", name="stand")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function indexAction()
     {
