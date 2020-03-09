@@ -46,9 +46,6 @@ class CreateDepartmentType extends AbstractType
             ->add('active', CheckboxType::class, array(
                 'label' => 'Aktiv?',
                 'required' => false
-            ))
-            ->add('save', SubmitType::class, array(
-                'label' => 'Opprett',
             ));
     }
 

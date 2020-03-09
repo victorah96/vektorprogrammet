@@ -33,6 +33,7 @@ class DepartmentController extends BaseController
 
         return $this->render('department_admin/create_department.html.twig', array(
             'form' => $form->createView(),
+            'buttonText' => "Opprett"
         ));
     }
 
@@ -66,6 +67,7 @@ class DepartmentController extends BaseController
         return $this->render('department_admin/create_department.html.twig', array(
             'department' => $department,
             'form' => $form->createView(),
+            'buttonText' => "Rediger",
         ));
     }
 }
