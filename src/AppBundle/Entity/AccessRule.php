@@ -236,9 +236,9 @@ class AccessRule
     public function isEmpty()
     {
         return
-            count($this->getUsers()) == 0 &&
-            count($this->getTeams()) == 0 &&
-            count($this->getRoles()) == 0 &&
+            empty($this->getUsers()) == true &&
+            empty($this->getTeams()) == true &&
+            empty($this->getRoles()) == true &&
             !$this->isForExecutiveBoard();
     }
 
