@@ -154,7 +154,6 @@ class AccessControlService
 
     private function userHasAccessToRule(User $user, AccessRule $rule): bool
     {
-
         if (empty($rule->getUsers() == false)) {
             if (count($rule->getUsers()) > 0 && !($user->isActive() && $this->userIsInRuleUserList($user, $rule))) {
                 return false;
