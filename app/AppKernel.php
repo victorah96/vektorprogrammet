@@ -20,7 +20,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new FM\ElfinderBundle\FMElfinderBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
-            new TFox\MpdfPortBundle\TFoxMpdfPortBundle(),
+            //new TFox\MpdfPortBundle\TFoxMpdfPortBundle(),  # Temp. commented out, to be removed in future
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
 	        new Http\HttplugBundle\HttplugBundle(),
 	        new Nexy\SlackBundle\NexySlackBundle(),
