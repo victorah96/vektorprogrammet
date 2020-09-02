@@ -15,6 +15,17 @@ github_webook:
 #             Static pages               #
 ##########################################
 
+test:
+ path: /test
+ defaults: {_controller: AppBundle:Test:show}
+ methods: [GET]
+
+test2:
+ path: /test2
+ defaults: {_controller: AppBundle:Test2:show}
+ methods: [GET]
+
+
 delete_blogg:
  path: /slette_innlegg/{id}
  defaults: { _controller: AppBundle:Blogg:delete}
