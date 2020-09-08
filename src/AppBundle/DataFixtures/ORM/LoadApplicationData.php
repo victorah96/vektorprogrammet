@@ -128,7 +128,7 @@ class LoadApplicationData extends AbstractFixture implements OrderedFixtureInter
         // Create answer objects for all the questions in the schema
         foreach ($interview4->getInterviewSchema()->getInterviewQuestions() as $interviewQuestion) {
             $answer = new InterviewAnswer();
-            $answer->setAnswer('Test answer');
+            $answer->setAnswer('test answer');
             $answer->setInterview($interview4);
             $answer->setInterviewQuestion($interviewQuestion);
             $interview4->addInterviewAnswer($answer);
@@ -224,7 +224,7 @@ class LoadApplicationData extends AbstractFixture implements OrderedFixtureInter
         // Create answer objects for all the questions in the schema
         foreach ($interview20->getInterviewSchema()->getInterviewQuestions() as $interviewQuestion) {
             $answer = new InterviewAnswer();
-            $answer->setAnswer('Test answer');
+            $answer->setAnswer('test answer');
             $answer->setInterview($interview20);
             $answer->setInterviewQuestion($interviewQuestion);
             $interview20->addInterviewAnswer($answer);
@@ -322,7 +322,7 @@ class LoadApplicationData extends AbstractFixture implements OrderedFixtureInter
         // Create answer objects for all the questions in the schema
         foreach ($interview->getInterviewSchema()->getInterviewQuestions() as $interviewQuestion) {
             $answer = new InterviewAnswer();
-            $answer->setAnswer('Test answer');
+            $answer->setAnswer('test answer');
             $answer->setInterview($interview);
             $answer->setInterviewQuestion($interviewQuestion);
             $interview->addInterviewAnswer($answer);

@@ -12,16 +12,13 @@
             <h2>{{ bloggInnlegg.getOverskrift() }}</h2>
             {{ bloggInnlegg.getInnlegg() }}
             <br><br>
-
-            <form method = "POST" action =  {{ path('delete_blogg', {id: bloggInnlegg.id}) }}>
-
-                <button>Slett</button>
-
-            </form>
+            <form method = "POST" action = {{ path('delete_blogg', {id: bloggInnlegg.id}) }}><button>Slett</button></form>
         </div>
     {% endfor %}
 
     <a href="{{ path('create_blogg') }}"><button>Lag nytt innlegg</button></a>
+            <form method = "POST" action = {{ path('delete_blogg', {id: bloggInnlegg.id}) }}><button>Slett</button></form>
+        </div>
 
 </body>
 </html>
