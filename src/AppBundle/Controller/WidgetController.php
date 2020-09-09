@@ -10,6 +10,7 @@ use AppBundle\Service\AdmissionStatistics;
 use AppBundle\Service\Sorter;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Utils\ReceiptStatistics;
+use AppBundle\Service\TodoListService;
 
 class WidgetController extends BaseController
 {
@@ -64,7 +65,7 @@ class WidgetController extends BaseController
                 ->getRepository('AppBundle:Application')
                 ->findByAdmissionPeriod($admissionPeriod);
         }
-        $appData = $admissionStatistics->generateCumulativeGraphDataFromApplicationsInSemester($applicationsInSemester, $semester);
+        $appData = $admissionStatistics->generateCumulativeGraphDataFromApplicationsInAdmissionPeriod($applicationsInSemester, $admissionPeriod);
 
         return $this->render('widgets/application_graph_widget.html.twig', [
             'appData' => $appData,
@@ -95,6 +96,25 @@ class WidgetController extends BaseController
         return $this->render('widgets/changelog_widget.html.twig', [
             'changeLogItems' => array_slice($changeLogItems, 0, 5)
         ]);
+    }
+    public function todoAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $currentSemester = $this->getSemesterOrThrow404();
+        $department = $this->getDepartmentOrThrow404();
+
+        $todoService = new TodoListService($em);
+
+        // Get sorted
+        $todoItems        = $todoService->getOrderedList($department, $currentSemester);
+        // Don't show completed
+        $incompletedItems = $todoService->getIncompletedTodoItems($todoItems, $currentSemester, $department);
+
+        return $this->render('widgets/todo_widget.html.twig', array(
+            'todo_items' => $incompletedItems,
+            'semester' => $currentSemester,
+            'department' => $department
+        ));
     }
 
     public function feedbackAction(Request $request)

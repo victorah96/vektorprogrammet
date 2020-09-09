@@ -49,6 +49,7 @@ class TeamAdminController extends BaseController
 
         $form->handleRequest($request);
         if ($form->isValid()) {
+            $teamMembership->setIsSuspended(false);
             $em = $this->getDoctrine()->getManager();
             $em->persist($teamMembership);
             $em->flush();
@@ -138,7 +139,7 @@ class TeamAdminController extends BaseController
      */
     private function sortTeamMembershipsByEndDate($a, $b)
     {
-        return $a->getStartSemester()->getSemesterStartDate() < $b->getStartSemester()->getSemesterStartDate();
+        return $a->getStartSemester()->getStartDate() < $b->getStartSemester()->getStartDate();
     }
 
     public function updateTeamAction(Request $request, Team $team)

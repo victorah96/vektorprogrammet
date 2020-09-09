@@ -55,6 +55,14 @@ class TeamMembership implements TeamMembershipInterface
     private $isTeamLeader;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     * @Assert\NotNull(message="Dette feltet kan ikke være tomt")
+     */
+    private $isSuspended;
+
+    /**
      * @var Team
      *
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="teamMemberships")
@@ -75,6 +83,7 @@ class TeamMembership implements TeamMembershipInterface
     public function __construct()
     {
         $this->isTeamLeader = false;
+        $this->isSuspended = false;
     }
 
     public function __toString()
@@ -220,8 +229,8 @@ class TeamMembership implements TeamMembershipInterface
      */
     public function isActiveInSemester(Semester $semester)
     {
-        $semesterStartLaterThanTeamMembership = $semester->getSemesterStartDate() >= $this->getStartSemester()->getSemesterStartDate();
-        $semesterEndsBeforeTeamMembership = $this->getEndSemester() === null || $semester->getSemesterEndDate() <= $this->getEndSemester()->getSemesterEndDate();
+        $semesterStartLaterThanTeamMembership = $semester->getStartDate() >= $this->getStartSemester()->getStartDate();
+        $semesterEndsBeforeTeamMembership = $this->getEndSemester() === null || $semester->getEndDate() <= $this->getEndSemester()->getEndDate();
 
         return $semesterStartLaterThanTeamMembership && $semesterEndsBeforeTeamMembership;
     }
@@ -278,5 +287,21 @@ class TeamMembership implements TeamMembershipInterface
     public function setIsTeamLeader($isTeamLeader)
     {
         $this->isTeamLeader = $isTeamLeader;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSuspended(): bool
+    {
+        return $this->isSuspended;
+    }
+
+    /**
+     * @param bool $isSuspended
+     */
+    public function setIsSuspended($isSuspended)
+    {
+        $this->isSuspended = $isSuspended;
     }
 }
